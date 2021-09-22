@@ -2,7 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const config = require('./config');
-const db = require('./db/db');
+
+const projectRoute = require('./routes/project');
 
 const app = express();
 
@@ -10,11 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
-app.get('/connect', async (req, res) => {
-  let users = await db.exec('usersGet');
-  console.log(users);
-  res.send({ status: 'Ok', message: 'Welcome to API' });
-});
+app.use('/project', projectRoute);
 
-const PORT = config.PORT;
+const PORT = config.port;
 app.listen(PORT, () => console.log(`App running on localhost ${PORT}`));
