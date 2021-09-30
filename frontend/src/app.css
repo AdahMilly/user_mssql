@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.app{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 70px 1fr;
+    grid-template-areas: "header header"
+                        "sidebar main";
+    min-height: 100vh;
+}
+
+
+.main{
+    grid-area: main;
+    background-color: #eee;
+}
+.sidebar{
+    grid-area: sidebar;
+    background-color: white;
+}
+.header{
+    grid-area: header;
+}
