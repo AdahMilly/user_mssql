@@ -1,4 +1,5 @@
 import React from 'react'
+import "./SideBar.css"
 
 import { Link } from 'react-router-dom'
 
@@ -19,7 +20,7 @@ const SideBar = () => {
     return (
         <div className="sidebar">
             <Button color="inherit">
-                <Link className={ classes.linkStyle} to="/addproject">
+                <Link className={ classes.linkStyle} to="/projecttaskcreated">
                     Dashboard
                 </Link>
             </Button>
@@ -31,6 +32,11 @@ const SideBar = () => {
             <Button color="inherit">
                 <Link className={classes.linkStyle} to="/tasks">
                     Tasks
+                </Link>
+            </Button>
+            <Button className="acc-btn">
+                <Link className={classes.linkStyle} to="/progress">
+                    Account    
                 </Link>
             </Button>
         </div>

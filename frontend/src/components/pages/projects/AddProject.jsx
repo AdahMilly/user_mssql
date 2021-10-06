@@ -1,6 +1,8 @@
+import {React, useState} from "react"
+
 import { Button, TextField } from "@mui/material"
 import { Send } from "@material-ui/icons"
-import { makeStyles } from "@mui/material"
+import { makeStyles } from "@mui/styles"
 
 const useStyles = makeStyles({
     formStyle: {
@@ -17,14 +19,33 @@ const useStyles = makeStyles({
 })
 
 const AddProject = () => {
+
+    const classes = useStyles()
+    const [project, setProject] = useState({
+        name: "",
+        technology:"",
+        isComplete: false
+    })
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        console.log(project)
+        setProject({
+            name: "",
+            technology: "",
+            isComplete: false
+        })
+    }
     return <>
-        <form className={classes.useStyles}>
+        <form className={classes.useStyles} onSubmit={handleSubmit}>
             <TextField
                 id="enter-project"
                 variant="outlined"
                 label="addProject"
                 autoFocus
                 fullWidth
+                value={project.name}
+                onChange={(e) => setProject({...project, name: e.target.value, date: new Date()})}
             />
             <Button color="primary" variant="contained" type="submit">
                 <Send />

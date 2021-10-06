@@ -1,12 +1,16 @@
+import { URL } from '../../../backend'
+
 import React from 'react'
+import useFetch from '../../../store/actions/useFetch'
 import AddProject from './AddProject'
-import ListProjects from './ListProjects'
 
 const Projects = () => {
+    const {loading, error, data} =useFetch(URL)
+
+    console.log({data,error})
     return (
         <div>
             <AddProject />
-            <ListProjects />
         </div>
     )
 }

@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[userByEmailGet]
+CREATE PROCEDURE [dbo].[userLogin]
     @email VARCHAR(250)
 
 as
@@ -7,12 +7,10 @@ set NOCOUNT on;
 
 BEGIN
     select u._id,
-        u.FIRST,
-        u.LAST,
+        u.first_name,
+        u.last_name,
         u.email,
-        u.age,
-        u.gender,
-        u.PASSWORD
+        u.password
 
     FROM [users] u
     WHERE email=@email;

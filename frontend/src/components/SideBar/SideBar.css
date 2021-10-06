@@ -1,0 +1,13 @@
+.sidebar{
+    display: flex;
+    flex-direction: column;
+}
+
+Button{
+    color: black;
+}
+
+.acc-btn{
+    margin-top: auto !important;
+    margin-bottom: 30px !important;
+}

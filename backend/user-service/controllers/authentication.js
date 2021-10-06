@@ -20,7 +20,7 @@ module.exports = {
 
     const { email, password } = req.body;
 
-    const { recordset } = await db.exec('userByEmailGet', { email });
+    const { recordset } = await db.exec('userLogin', { email });
 
     const user = recordset[0];
     if (!user)
@@ -33,11 +33,9 @@ module.exports = {
     res.send({
       user: _.pick(user, [
         '_id',
-        'firstname',
-        'lastname',
+        'first_name',
+        'last_name',
         'email',
-        'gender',
-        'age',
       ]),
       token,
     });
@@ -52,17 +50,15 @@ module.exports = {
 
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, salt);
-    const { firstname, email, gender, age, lastname } = req.body;
+    const { first_name, email, last_name } = req.body;
     const id = uuidv4();
     try {
-      const result = db.exec('userRegister', {
+      const result = db.exec('registerUser', {
         id,
-        firstname,
-        lastname,
+        first_name,
+        last_name,
         password,
         email,
-        gender,
-        age,
       });
       console.log(result);
       res.send({ message: 'User registered successfully' });
