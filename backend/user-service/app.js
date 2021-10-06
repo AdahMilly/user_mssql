@@ -6,12 +6,14 @@ const cors = require('cors');
 const config = require('./config/config');
 const db = require('./db');
 
+
 // Routes
 const usersRoute = require('./routes/user');
 const authRoute = require('./routes/authentication');
 
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(cors());
 
 app.use('/users', usersRoute);

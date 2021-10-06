@@ -50,19 +50,20 @@ module.exports = {
 
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, salt);
-    const { first_name, email, last_name } = req.body;
+    const { firstName:first_name, email, lastName: last_name } = req.body;
     const id = uuidv4();
     try {
-      const result = db.exec('registerUser', {
+      const result = await db.exec('registerUser', {
         id,
         first_name,
         last_name,
         password,
         email,
       });
-      console.log(result);
+      console.log({result});
       res.send({ message: 'User registered successfully' });
     } catch (error) {
+      console.log(error)
       res.status(500).send({ message: 'Internal Server Error' });
     }
   },

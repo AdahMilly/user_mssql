@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
+import useFetch from "../../hooks/useFetch"
+
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, Button } from "@material-ui/core";
+
+import { URL } from "../../backend/index";
 
 
 const useStyles = makeStyles({
@@ -24,8 +28,13 @@ const SignIn = () => {
     password: "",
   });
 
+  const {loading, error, data, methodFunctions} = useFetch(URL+"auth/loginUser",{method:"POST"})
+
+  console.log({loading, error,data})
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    methodFunctions(credential)
     setCredential({ email: "", password: "" });
   };
 

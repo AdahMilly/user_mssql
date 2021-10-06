@@ -9,10 +9,12 @@ import SignUp from "./components/auth/SignUp";
 import Projects from "./components/pages/projects/Projects";
 import SideBar from "./components/SideBar/SideBar";
 import AddProject from "./components/pages/projects/AddProject";
+import Tasks from "./components/pages/tasks/Tasks"
 
 import "./app.css";
 import ProjectTaskCreated from "./components/pages/ProjectTaskCreated";
 import AddTask from "./components/pages/tasks/AddTask";
+import Progress from "./components/pages/Progress";
 
 const App = () => {
   return (
@@ -28,8 +30,10 @@ const App = () => {
                 <Route path="/signup" component={SignUp} />
                 <Route path="/projects" component={Projects} />
                 <Route path="/addproject" component={AddProject} />
-                <Route path="/tasks" component={AddTask} />
-                <Route path="/projectttaskcreated" component={ProjectTaskCreated} />
+                <Route path="/tasks" component={Tasks} />
+                <Route path="/addtask" component={AddTask} />
+                <Route path="/projecttaskcreated" component={ProjectTaskCreated} />
+                <Route path="/progress" component={Progress} />
               </Switch>
             </div>
           </div>

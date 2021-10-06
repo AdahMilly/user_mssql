@@ -3,6 +3,7 @@ const config = require('./config/config');
 class Connection {
   constructor() {
     this.connectToDb();
+    this.exec = this.exec.bind(this)
   }
 
  async connectToDb () {
@@ -26,6 +27,7 @@ class Connection {
   };
 
 async  exec(procName, data = {}) {
+  
     var request = await this.pool.request();
     request = this.createRequest(request, data);
 

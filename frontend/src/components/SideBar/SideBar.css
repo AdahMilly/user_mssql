@@ -11,3 +11,8 @@ Button{
     margin-top: auto !important;
     margin-bottom: 30px !important;
 }
+
+.btn{
+    display:block !important;
+    margin:auto !important;
+}

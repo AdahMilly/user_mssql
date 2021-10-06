@@ -5,48 +5,43 @@ import { AppBar, Typography, Toolbar, Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-    root: {
-        flexGrow:1
-    },
+  root: {
+    flexGrow: 1,
+  },
   linkStyle: {
-    color: '#fafafa',
-    textDecoration:'none'
+    color: "#fafafa",
+    textDecoration: "none",
   },
 });
 
 const NavBar = () => {
+  const classes = useStyles();
+  const history = useHistory();
 
-    const classes = useStyles()
-    const history = useHistory()
+  const handleGetStarted = () => {
+    history.push("/signup");
+  };
+  return (
+    <>
+      <AppBar className="header" position="static">
+        <Toolbar>
+          <Typography variant="h5" className={classes.root}>
+            <h5 className={classes.linkStyle} to="/">
+              projectManagement
+            </h5>
+          </Typography>
+          <Button color="inherit" onClick={() => handleGetStarted()}>
+            Get Started
+          </Button>
+          <Button color="inherit">
+            <Link className={classes.linkStyle} to="/signin">
+              SignIn
+            </Link>
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+};
 
-    const handleGetStarted = () => {
-        history.push('/signup')
-    }
-    return (
-        <>
-            <AppBar className="header" position="static">
-                <Toolbar>
-                    <Typography variant="h5" className={classes.root}>
-                    <h5 className={ classes.linkStyle} to="/">
-                        projectManagement
-                    </h5>
-                    </Typography>
-                    <Button
-                        color="inherit"
-                        onClick={() => handleGetStarted()}
-                    >
-                        Get Started
-                    </Button>
-                    <Button color="inherit">
-                        <Link className={ classes.linkStyle} to="/signin">
-                            SignIn
-                        </Link>
-                    </Button>
-                </Toolbar>
-
-            </AppBar>
-        </>
-     );
-}
- 
 export default NavBar;

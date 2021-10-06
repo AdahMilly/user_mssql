@@ -1,19 +1,17 @@
 import {useState, useEffect} from "react"
 
-const useFetch = (url = '', options = null) => {
+const useFetch = (url = '', options = {method:'GET'}) => {
     const [data,setData] = useState(null)
     const [error,setError] = useState(null)
+    const [isMounted, setIsMounted] = useState(false)
     const [loading,setLoading] = useState(false)
 
-    useEffect(() => {
-
-        let isMounted = true
-        setLoading(true)
-
-        fetch(url,options)
+    const methodFunctions =  (data) => {
+        fetch(url,{...options,body: JSON.stringify(data), headers: {'Content-Type': 'application/json'}})
         .then(res => res.json())
         .then(data =>{
             if (isMounted) {
+                console.log({data})
             setData(data)
             setError(null)
             }
@@ -26,10 +24,19 @@ const useFetch = (url = '', options = null) => {
         })
         .finally(() => isMounted && setLoading(false))
 
-        return () => (isMounted= false)
-    }, [url, options ])
+    } 
 
-    return {loading, error, data}
+    useEffect(() => {
+        setLoading(true)
+
+       if(options.method === "GET") methodFunctions()
+
+
+        return () => setIsMounted(false)
+    
+    }, [url, options,data ])
+
+    return {loading, error, data, methodFunctions}
 }
 
 export default useFetch

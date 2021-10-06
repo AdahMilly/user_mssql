@@ -1,7 +1,6 @@
-import AddTask from "./AddTask"
 
-const Task = () => {
-    return <h3>List of tasks</h3>
+const Tasks = () => {
+    return <h3>Tasks created</h3>
  }
 
-export default Task
+export default Tasks
