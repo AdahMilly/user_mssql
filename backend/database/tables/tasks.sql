@@ -1,10 +1,26 @@
 CREATE TABLE tasks
 (
-    _id varchar(100) NOT NULL PRIMARY KEY,
+    _id INT IDENTITY(1, 1) PRIMARY KEY,
     task_name varchar(250) NOT NULL,
     duration INT NOT NULL,
-    project_id varchar(100) NOT NULL,
-    user_name varchar(100) NOT NULL,
+    project_id INT,
+    user_id varchar(100) NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
+    CONSTRAINT FK_projects_tasks FOREIGN KEY (project_id) REFERENCES projects (_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT FK_user_tasks FOREIGN KEY (user_id) REFERENCES users (_id) ON DELETE NO ACTION ON UPDATE NO ACTION
 )
+
+
+ALTER TABLE tasks
+ADD isDeleted INT DEFAULT 0
+
+DROP TABLE tasks
+
+ALTER TABLE dbo.tasks   
+DROP CONSTRAINT FK__tasks__project_i__4D94879B;   
+
+select CONSTRAINT_NAME
+from INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+where TABLE_NAME = 'tasks'
+

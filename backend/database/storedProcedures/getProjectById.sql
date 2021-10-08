@@ -1,5 +1,5 @@
-CREATE PROCEDURE [dbo].[getProjectById]
-    @_id VARCHAR(100)
+CREATE OR ALTER PROCEDURE [dbo].[getProjectById]
+    @_id INT
 
 as
 
@@ -7,9 +7,9 @@ set NOCOUNT on;
 
 BEGIN
     select p._id,
-        p.name,
-        p.head_user_id,
-        p.technology,
+        p.project_name,
+        p.user_name,
+        p.isDeleted,
         p.start_date,
         p.end_date
 

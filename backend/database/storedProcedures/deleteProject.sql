@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[deleteProject]
+CREATE OR ALTER PROCEDURE [dbo].[deleteProject]
     (@_id VARCHAR)
 
 AS

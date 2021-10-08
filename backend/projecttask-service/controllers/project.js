@@ -24,37 +24,32 @@ module.exports = {
     }
   },
   createOne: async (req, res) => {
-    const { id, name, head_user_id, technology, end_date } = req.body;
+    const { project_name, user_name, isDeleted, start_date, end_date } = req.body;
     try {
-      const { recordset } = await db.exec('createProject', {
-        _id: id,
-        name: name,
-        head_user_id: head_user_id,
-        technology: technology,
+      await db.exec('createProject', {
+        project_name: project_name,
+        user_name: user_name,
+        isDeleted: isDeleted,
+        start_date: start_date,
         end_date: end_date,
       });
-      const projectCreated = recordset[0];
-      if (!projectCreated)
-        return res.status(500).send({ message: 'Project not created' });
-      res.send({ projectCreated });
+      res.send({ message:"Project Created...." });
     } catch (error) {
       console.log(error);
     }
   },
   updateOne: async (req, res) => {
-    const { id, name, head_user_id, technology, end_date } = req.body;
+    const { id, project_name, user_name, isDeleted, start_date, end_date } = req.body;
     try {
-      const { recordset } = await db.exec('updateProject', {
+      await db.exec('updateProject', {
         _id: id,
-        name: name,
-        head_user_id: head_user_id,
-        technology: technology,
+        project_name: project_name,
+        user_name: user_name,
+        isDeleted: isDeleted,
+        start_date: start_date,
         end_date: end_date,
       });
-      const projectUpdated = recordset[0];
-      if (!projectUpdated)
-        return res.status(500).send({ message: 'Project not updated' });
-      res.send({ projectUpdated });
+      res.send({ message: 'Project updated successfully' });
     } catch (error) {
       console.log(error);
     }
@@ -63,7 +58,7 @@ module.exports = {
     const { id } = req.params;
     try {
       await db.exec('deleteProject', { _id: id });
-      res.send({ message: 'Project not deleted' });
+      res.send({ message: 'Project deleted successfully' });
     } catch (error) {
       console.log(error);
     }

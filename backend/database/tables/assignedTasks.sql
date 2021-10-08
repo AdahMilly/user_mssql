@@ -1,0 +1,14 @@
+CREATE TABLE AssignedTasks (
+	_id varchar(100) NOT NULL PRIMARY KEY,
+	task_id varchar(100) NOT NULL,
+	user_id varchar(100) NOT NULL,
+	FOREIGN KEY (task_id) REFERENCES tasks (_id) ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY (user_id) REFERENCES users (_id) ON DELETE NO ACTION ON UPDATE NO ACTION
+)
+
+select CONSTRAINT_NAME
+from INFORMATION_SCHEMA.TABLE_CONSTRAINTS
+where TABLE_NAME = 'assignedTasks'
+
+ALTER TABLE dbo.assignedTasks   
+DROP CONSTRAINT FK__AssignedT__user___5629CD9C; 

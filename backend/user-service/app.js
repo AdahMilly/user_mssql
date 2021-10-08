@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
 app.get('/connect', async (req, res) => {
   let users = await db.exec('usersGet');
   console.log(users);
-  res.send({ status: 'Ok', message: 'Welcome to API' });
+  res.send({ status: 'Ok', message: 'Welcome to users service' });
 });
 
 const PORT = config.port;

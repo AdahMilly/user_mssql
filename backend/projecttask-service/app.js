@@ -1,9 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const config = require('./config');
+const config = require('./config/config');
 
 const projectRoute = require('./routes/project');
+const jwtAuth = require('./middleware/jwtAuth');
 
 const app = express();
 

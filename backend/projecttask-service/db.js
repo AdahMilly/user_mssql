@@ -1,11 +1,12 @@
 const sql = require('mssql');
-const config = require('./config');
+const config = require('./config/config');
 class Connection {
   constructor() {
     this.connectToDb();
+    this.exec = this.exec.bind(this)
   }
 
-  connectToDb = async () => {
+ async connectToDb () {
     try {
       this.pool = await sql.connect(config.sql);
       console.log('Connected to database');
@@ -15,7 +16,7 @@ class Connection {
     }
   };
 
-  createRequest = (request, data = {}) => {
+  createRequest(request, data = {}) {
     const keys = Object.keys(data);
 
     keys.map((keyName) => {
@@ -25,7 +26,8 @@ class Connection {
     return request;
   };
 
-  exec = async (procName, data = {}) => {
+async  exec(procName, data = {}) {
+  
     var request = await this.pool.request();
     request = this.createRequest(request, data);
 
@@ -33,7 +35,7 @@ class Connection {
     return results;
   };
 
-  query = async (query, options) => {
+async  query  (query, options) {
     const results = await this.pool.request().query(query);
     return results;
   };

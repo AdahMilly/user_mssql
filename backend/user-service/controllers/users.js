@@ -6,9 +6,9 @@ module.exports = {
     res.send({ users: recordset });
   },
   getUser: async (req, res) => {
-    const { id } = req.params;
+    const id = req.params.id;
     let { recordset } = await db.exec('userGet', {
-      userId: id,
+      _id: id,
     });
     res.send({ user: recordset[0] });
   },

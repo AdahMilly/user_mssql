@@ -12,11 +12,6 @@ const {
 } = process.env;
 const sqlEncrypt = process.env.SQL_ENCRYPT === "true";
 
-console.log(  SQL_USER,
-    SQL_PASSWORD,
-    SQL_DATABASE,
-    SQL_SERVER);
-
 assert(PORT, "PORT is required");
 assert(HOST, "HOST is required");
 
