@@ -7,11 +7,4 @@
 	FOREIGN KEY (user_id) REFERENCES users (_id) ON DELETE NO ACTION ON UPDATE NO ACTION
 )
 
-select CONSTRAINT_NAME
-from INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-where TABLE_NAME = 'assignedProjects'
-
-ALTER TABLE dbo.assignedProjects   
-DROP CONSTRAINT FK__assignedP__user___52593CB8; 
-
 

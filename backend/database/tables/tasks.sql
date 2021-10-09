@@ -12,15 +12,8 @@ CREATE TABLE tasks
 )
 
 
-ALTER TABLE tasks
-ADD isDeleted INT DEFAULT 0
 
-DROP TABLE tasks
+   
 
-ALTER TABLE dbo.tasks   
-DROP CONSTRAINT FK__tasks__project_i__4D94879B;   
 
-select CONSTRAINT_NAME
-from INFORMATION_SCHEMA.TABLE_CONSTRAINTS
-where TABLE_NAME = 'tasks'
 
