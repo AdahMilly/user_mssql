@@ -6,7 +6,7 @@ router.get('/all', getAll);
 
 router.get('/one/:id', getOne);
 
-router.put('/create', createOne);
+router.post('/create', createOne);
 
 router.post('/update', updateOne);
 

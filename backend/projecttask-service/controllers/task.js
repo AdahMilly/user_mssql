@@ -23,18 +23,17 @@ module.exports = {
     }
   },
   createOne: async (req, res) => {
-    const { id, name, duration, project_id, start_date, end_date } = req.body;
+    const {_id,task_name, duration, user_id, project_id, start_date, end_date } = req.body;
     try {
-      const { recordset } = await db.exec('createTask', {
-        _id: id,
-        name: name,
+      await db.exec('createTask', {
+        _id: _id,
+        task_name: task_name,
         duration: duration,
         project_id: project_id,
         user_id: user_id,
         start_date: start_date,
         end_date: end_date,
       });
-      const taskCreated = recordset[0];
       if (!taskCreated)
         return res.status(500).send({ message: 'Task not created' });
       res.send({ taskCreated });

@@ -12,7 +12,7 @@ module.exports = {
   getOne: async (req, res) => {
     const { id } = req.params;
     try {
-      const { recordset } = await db.exec('getProjectById', { _id: id });
+      await db.exec('getProjectById', { _id: id });
       const project = recordset[0];
       if (!project)
         return res
