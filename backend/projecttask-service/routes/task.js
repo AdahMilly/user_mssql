@@ -10,6 +10,6 @@ router.post('/create', createOne);
 
 router.post('/update', updateOne);
 
-router.delete('/delete', deleteOne);
+router.delete('/delete/:id', deleteOne);
 
 module.exports = router;

@@ -4,7 +4,7 @@ module.exports = {
   getAll: async (req, res) => {
     try {
       const { recordset } = await db.exec('GetAllTasks');
-      res.send({ projects: recordset });
+      res.send({ tasks: recordset });
     } catch (error) {
       console.log(error);
     }
@@ -16,7 +16,7 @@ module.exports = {
         _id: id,
       });
       const task = recordset[0];
-      if (!project) return res.status(404).send({ message: 'No task found' });
+      if (!task) return res.status(404).send({ message: 'No task found' });
       res.send({ task });
     } catch (error) {
       console.log(error);
@@ -41,21 +41,18 @@ module.exports = {
     }
   },
   updateOne: async (req, res) => {
-    const { id, name, duration, project_id, start_date, end_date } = req.body;
+    const { id ,task_name, duration, project_id, user_id, start_date, end_date } = req.body;
     try {
-      const { recordset } = await db.exec('updateTask', {
-        _id: id,
-        name: name,
+      await db.exec('updateTask', {
+        _id : id,
+        task_name: task_name,
         duration: duration,
         project_id: project_id,
         user_id: user_id,
         start_date: start_date,
         end_date: end_date,
       });
-      const taskUpdated = recordset[0];
-      if (!taskUpdated)
-        return res.status(500).send({ message: 'Task not updated' });
-      res.send({ taskUpdated });
+      res.send({ message : "Task updated successfully"});
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +61,7 @@ module.exports = {
     const { id } = req.params;
     try {
       await db.exec('deleteTask', { _id: id });
-      res.send({ message: 'Task not deleted' });
+      res.send({ message: 'Task deleted' });
     } catch (error) {
       console.log(error);
     }
