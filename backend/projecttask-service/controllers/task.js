@@ -25,7 +25,7 @@ module.exports = {
   createOne: async (req, res) => {
     const {task_name, duration, user_id, project_id, start_date, end_date } = req.body;
     try {
-      await db.exec('createTask', {
+      const taskCreated = await db.exec('createTask', {
         task_name: task_name,
         duration: duration,
         project_id: project_id,
