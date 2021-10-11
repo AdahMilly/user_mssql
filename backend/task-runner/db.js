@@ -3,6 +3,7 @@ const config = require('./config/config');
 class Connection {
   constructor() {
     this.connectToDb();
+    this.exec = this.exec.bind(this)
   }
 
  async connectToDb () {
