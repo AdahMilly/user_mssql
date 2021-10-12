@@ -2,12 +2,8 @@ const db = require('../db');
 
 module.exports = {
   getAll: async (req, res) => {
-    try {
       const { recordset } = await db.exec('GetAllProjects');
       res.send({ projects: recordset });
-    } catch (error) {
-      console.log(error);
-    }
   },
   getOne: async (req, res) => {
     const { id } = req.params;

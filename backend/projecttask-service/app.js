@@ -16,5 +16,10 @@ app.use(cors());
 app.use('/project', projectRoute);
 app.use('/task', taskRoute)
 
+app.use("*",function(err,req,res,next) {
+    console.log(err)
+    res.status(500).send({message: "Something went wrong"})
+})
+
 const PORT = config.port;
 app.listen(PORT, () => console.log(`App running on localhost ${PORT}`));
