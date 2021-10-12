@@ -1,7 +1,6 @@
-CREATE PROCEDURE [dbo].[createTask]
+CREATE OR ALTER PROCEDURE [dbo].[createTask]
 (
-    @_id INT ,
-    @name varchar(250) ,
+    @task_name varchar(250) ,
     @duration INT ,
     @project_id varchar(100) ,
     @user_id varchar(100) ,
@@ -11,16 +10,14 @@ CREATE PROCEDURE [dbo].[createTask]
 AS
 BEGIN
     INSERT INTO [dbo].[tasks]
-        (_id,
-        name,
+        (task_name,
         duration,
         project_id,
         user_id,
         start_date,
         end_date)
     VALUES
-        (@_id,
-        @name,
+        (@task_name,
         @duration,
         @project_id,
         @user_id,

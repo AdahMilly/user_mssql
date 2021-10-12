@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { Card} from "@mui/material";
 
@@ -15,11 +15,12 @@ import "./app.css";
 import ProjectTaskCreated from "./components/pages/ProjectTaskCreated";
 import AddTask from "./components/pages/tasks/AddTask";
 import Progress from "./components/pages/Progress";
+import ProtectedRouter from "./components/routerHandler/protectedRouter";
 
 const App = () => {
   return (
     <>
-      <BrowserRouter>
+      <Router>
         <Card maxWidth="md">
           <div class="app">
             <NavBar />
@@ -28,17 +29,17 @@ const App = () => {
               <Switch>
                 <Route path="/signin" component={SignIn} />
                 <Route path="/signup" component={SignUp} />
-                <Route path="/projects" component={Projects} />
-                <Route path="/addproject" component={AddProject} />
-                <Route path="/tasks" component={Tasks} />
-                <Route path="/addtask" component={AddTask} />
-                <Route path="/projecttaskcreated" component={ProjectTaskCreated} />
-                <Route path="/progress" component={Progress} />
+                <ProtectedRouter path="/projects" component={Projects} />
+                <ProtectedRouter path="/addproject" component={AddProject} />
+                <ProtectedRouter path="/tasks" component={Tasks} />
+                <ProtectedRouter path="/addtask" component={AddTask} />
+                <ProtectedRouter path="/dashboard" component={ProjectTaskCreated} />
+                <ProtectedRouter path="/progress" component={Progress} />
               </Switch>
             </div>
           </div>
         </Card>
-      </BrowserRouter>
+      </Router>
     </>
   );
 };

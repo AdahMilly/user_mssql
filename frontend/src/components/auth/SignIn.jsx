@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 
 import useFetch from "../../hooks/useFetch"
 
@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, Button } from "@material-ui/core";
 
 import { URL } from "../../backend/index";
+import { withRouter } from "react-router";
 
 
 const useStyles = makeStyles({
@@ -37,6 +38,10 @@ const SignIn = () => {
     methodFunctions(credential)
     setCredential({ email: "", password: "" });
   };
+
+  const onLogin = () => {
+    window.localStorage.setItem("isAuthenticated", true)
+  }
 
 
   return (
@@ -72,6 +77,7 @@ const SignIn = () => {
           color="primary"
           className={classes.spacing}
           type="submit"
+          onClick={onLogin}
         >
           SignIn
         </Button>
@@ -80,4 +86,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default withRouter(SignIn);

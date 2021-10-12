@@ -11,6 +11,8 @@ CREATE TABLE projects
 ALTER TABLE projects
 ADD isDeleted INT DEFAULT 0
 
+SELECT * FROM projects
+
 ALTER TABLE projects
 ADD user_id VARCHAR(100)
 

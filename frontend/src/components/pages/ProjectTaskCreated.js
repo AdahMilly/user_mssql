@@ -1,3 +1,5 @@
+import { withRouter } from "react-router-dom"
+
 import ListProjects from "./projects/ListProjects"
 import ListTasks from "./tasks/ListTasks"
 
@@ -10,4 +12,4 @@ const ProjectTaskCreated = () => {
 }
 
 
-export default ProjectTaskCreated
+export default withRouter(ProjectTaskCreated)

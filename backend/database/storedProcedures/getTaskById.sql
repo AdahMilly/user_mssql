@@ -7,7 +7,7 @@ set NOCOUNT on;
 
 BEGIN
     select t._id,
-        t.name,
+        t.task_name,
         t.duration,
         t.project_id,
         t.user_id,

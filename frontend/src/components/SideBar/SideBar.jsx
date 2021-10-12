@@ -19,7 +19,7 @@ const SideBar = () => {
   return (
     <div className="sidebar">
       <Button color="inherit">
-        <Link className={classes.linkStyle} to="/projecttaskcreated">
+        <Link className={classes.linkStyle} to="/dashboard">
           Dashboard
         </Link>
       </Button>

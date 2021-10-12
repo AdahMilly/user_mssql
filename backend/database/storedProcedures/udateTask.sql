@@ -1,6 +1,6 @@
 CREATE PROCEDURE [dbo].[updateTask]
-    @_id VARCHAR(100),
-    @name varchar(250),
+    @_id INT,
+    @task_name varchar(250),
     @duration varchar(100),
     @project_id varchar(250),
     @user_id VARCHAR(100),
@@ -10,8 +10,8 @@ CREATE PROCEDURE [dbo].[updateTask]
 AS
 BEGIN
     UPDATE [dbo].[tasks]
-    SET _id =@_id,
-        name = @name,
+    SET
+        task_name = @task_name,
         duration = @duration,
         project_id = @project_id,
         user_id = @user_id,

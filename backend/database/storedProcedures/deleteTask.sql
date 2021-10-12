@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[deleteTasks]
+CREATE OR ALTER PROCEDURE [dbo].[deleteTask]
     (@_id VARCHAR)
 
 AS
