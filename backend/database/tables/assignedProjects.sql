@@ -7,4 +7,6 @@
 	FOREIGN KEY (user_id) REFERENCES users (_id) ON DELETE NO ACTION ON UPDATE NO ACTION
 )
 
+DROP TABLE assignedProjects
+
 
