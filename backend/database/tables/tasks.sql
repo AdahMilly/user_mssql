@@ -12,7 +12,8 @@ CREATE TABLE tasks
 )
 
 
-   
+ALTER TABLE tasks
+ADD isComplete INT DEFAULT 0
 
 
 

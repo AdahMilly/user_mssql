@@ -1,5 +1,5 @@
 CREATE OR ALTER PROCEDURE [dbo].[getProjectById]
-    @_id INT
+    @_id varchar(100)
 
 as
 
@@ -14,5 +14,5 @@ BEGIN
         p.end_date
 
     FROM [projects] p
-    WHERE _id=@_id;
+    WHERE _id=@_id and isDeleted=0;
 end;

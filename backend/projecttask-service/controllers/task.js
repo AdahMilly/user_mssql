@@ -25,7 +25,7 @@ module.exports = {
   createOne: async (req, res) => {
     const {task_name, duration, user_id, project_id, start_date, end_date } = req.body;
     try {
-      const taskCreated = await db.exec('createTask', {
+      await db.exec('createTask', {
         task_name: task_name,
         duration: duration,
         project_id: project_id,
@@ -33,26 +33,7 @@ module.exports = {
         start_date: start_date,
         end_date: end_date,
       });
-      if (!taskCreated)
-        return res.status(500).send({ message: 'Task not created' });
-      res.send({ taskCreated });
-    } catch (error) {
-      console.log(error);
-    }
-  },
-  updateOne: async (req, res) => {
-    const { id ,task_name, duration, project_id, user_id, start_date, end_date } = req.body;
-    try {
-      await db.exec('updateTask', {
-        _id : id,
-        task_name: task_name,
-        duration: duration,
-        project_id: project_id,
-        user_id: user_id,
-        start_date: start_date,
-        end_date: end_date,
-      });
-      res.send({ message : "Task updated successfully"});
+      return res.status(500).send({ message: 'Task created successfully' });
     } catch (error) {
       console.log(error);
     }
@@ -60,6 +41,11 @@ module.exports = {
   deleteOne: async (req, res) => {
     const { id } = req.params;
     try {
+      const { recordset } = await db.exec('getTaskById', {
+        _id: id,
+      });
+      const task = recordset[0];
+      if (!task) return res.status(404).send({ message: 'No task with that Id found' });
       await db.exec('deleteTask', { _id: id });
       res.send({ message: 'Task deleted' });
     } catch (error) {

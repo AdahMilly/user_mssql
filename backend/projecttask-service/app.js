@@ -5,7 +5,6 @@ const config = require('./config/config');
 
 const projectRoute = require('./routes/project');
 const taskRoute = require('./routes/task');
-const jwtAuth = require('./middleware/jwtAuth');
 
 const app = express();
 
