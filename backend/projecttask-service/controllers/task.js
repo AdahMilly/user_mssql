@@ -52,4 +52,15 @@ module.exports = {
       console.log(error);
     }
   },
+  markTaskAsComplete: async (req,res) => {
+    const {id} = req.params;
+    try{
+      await db.exec('markTaskAsComplete', {
+        _id: id
+      })
+      res.send({message: 'Task completed'})
+    }catch(error){
+      console.log(error);
+    }
+  }
 };
