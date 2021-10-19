@@ -1,6 +1,5 @@
 # user_mssql
 user_mssql is an application that helps with project and task management and tracking.
-Required Features
 
 ## Application features
  
