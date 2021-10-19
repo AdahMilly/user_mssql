@@ -1,4 +1,4 @@
-# user_mssql# SendIT
+# user_mssql# 
 user_mssql is an application that helps with project and task management and tracking.
 Required Features
 
@@ -21,6 +21,8 @@ The following endpoints should be available for use once the API is complete.
 | GET     /projects                 | Fetch all projects                |
 
 and many more
+
+
 **NB:**
 
   -  The user can only view a project or task that he/she has been assigned to.
