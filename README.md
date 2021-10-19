@@ -39,7 +39,7 @@ and many more
 
 [HTML](https://en.wikipedia.org/wiki/HTML) Markup language
 
-[CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+[CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets) Styling sheet
 
 [Reactjs](https://reactjs.org/) UI library
 
