@@ -33,14 +33,15 @@ and many more
 
 [Expressjs](https://expressjs.com/) Framework
 
-[Mssql](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) 
+[Mssql](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) database management
 
 [Javascript](https://en.wikipedia.org/wiki/JavaScript) language
 
-[HTML](https://en.wikipedia.org/wiki/HTML) 
+[HTML](https://en.wikipedia.org/wiki/HTML) Markup language
 
 [CSS](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
 [Reactjs](https://reactjs.org/) UI library
+[MaterialUI](https://mui.com/) CSS Framework
 
 
 ### Contributing to the application
