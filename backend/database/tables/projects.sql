@@ -11,6 +11,9 @@ CREATE TABLE projects
 ALTER TABLE projects
 ADD isDeleted INT DEFAULT 0
 
+ALTER TABLE projects
+ADD description VARCHAR(1000) 
+
 SELECT * FROM projects
 
 ALTER TABLE projects
