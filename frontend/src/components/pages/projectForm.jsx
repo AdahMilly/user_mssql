@@ -3,8 +3,8 @@ import React from "react";
 
 const ProjectForm = () => {
   return (
-    <form>
-      <Grid spacing={2} container justifyContent="center">
+    <form >
+      <Grid spacing={2} container justifyContent="center" style={{height: '80vh'}}>
         <Grid
           container
           alignItems="center"

@@ -18,24 +18,24 @@ const SideBar = () => {
   const classes = useStyles();
   return (
     <div className="sidebar">
-      <Button variant={"contained"}>
+      <Button variant={"outlined"} style={{width:"100px", alignSelf:"center"}}>
         <Link className={classes.linkStyle} to="/dashboard">
           Dashboard
         </Link>
       </Button>
       <ExpandMinimize title="Tasks bar">
-        <Button className="btn" variant={"contained"}>
+        <Button className="btn" variant={"outlined"}>
           <Link className={classes.linkStyle} to="/addtask">
             Create Task
           </Link>
         </Button>
-        <Button className="btn" variant={"contained"}>
+        <Button className="btn" variant={"outlined"}>
           <Link className={classes.linkStyle} to="/tasks">
             View Tasks
           </Link>
         </Button>
       </ExpandMinimize>
-      <Button className="acc-btn" variant={"contained"}>
+      <Button className="acc-btn" variant={"outlined"} style={{width:"100px", alignSelf:"center"}}>
         <Link className={classes.linkStyle} to="/progress">
           Account
         </Link>

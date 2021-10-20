@@ -30,10 +30,10 @@ const NavBar = () => {
               projectManagement
             </h5>
           </Typography>
-          <Button variant={"contained"} onClick={() => handleGetStarted()}>
+          <Button variant={"outlined"} onClick={() => handleGetStarted()}>
             Get Started
           </Button>
-          <Button variant={"contained"}>
+          <Button variant={"outlined"}>
             <Link className={classes.linkStyle} to="/signin">
               SignIn
             </Link>
