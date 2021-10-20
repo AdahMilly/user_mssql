@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[userGet]
+CREATE OR ALTER PROCEDURE [dbo].[userGet]
     @_id VARCHAR(100)
 
 as
@@ -11,7 +11,8 @@ BEGIN
         u.last_name,
         u.email,
         u.password,
-        u.isDeleted
+        u.isDeleted,
+        u.role
 
     FROM [users] u
     WHERE _id=@_id;
