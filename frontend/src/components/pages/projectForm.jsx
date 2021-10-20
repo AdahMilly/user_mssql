@@ -63,8 +63,8 @@ const ProjectForm = () => {
           </Grid>
 
           <Grid item xs={12} container justifyContent="space-evenly">
-            <Button>Create</Button>
-            <Button>Cancel</Button>
+            <Button variant={"contained"}>Create</Button>
+            <Button variant={"contained"}>Cancel</Button>
           </Grid>
         </Grid>
       </Grid>

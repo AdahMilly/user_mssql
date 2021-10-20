@@ -52,7 +52,7 @@ const Projects = () => {
                 </Typography>
               </Grid>
               <Grid item>
-                <Button onClick={handleClick}>Create new</Button>
+                <Button onClick={handleClick} variant={"contained"}>Create new</Button>
               </Grid>
             </Grid>
           </Paper>

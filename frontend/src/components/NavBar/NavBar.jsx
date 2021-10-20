@@ -23,17 +23,17 @@ const NavBar = () => {
   };
   return (
     <>
-      <AppBar className="header" position="static">
+      <AppBar className="header" position="static" color={"primary"}>
         <Toolbar>
           <Typography variant="h5" className={classes.root}>
             <h5 className={classes.linkStyle} to="/">
               projectManagement
             </h5>
           </Typography>
-          <Button color="inherit" onClick={() => handleGetStarted()}>
+          <Button variant={"contained"} onClick={() => handleGetStarted()}>
             Get Started
           </Button>
-          <Button color="inherit">
+          <Button variant={"contained"}>
             <Link className={classes.linkStyle} to="/signin">
               SignIn
             </Link>

@@ -18,24 +18,24 @@ const SideBar = () => {
   const classes = useStyles();
   return (
     <div className="sidebar">
-      <Button color="inherit">
+      <Button variant={"contained"}>
         <Link className={classes.linkStyle} to="/dashboard">
           Dashboard
         </Link>
       </Button>
       <ExpandMinimize title="Tasks bar">
-        <Button className="btn">
+        <Button className="btn" variant={"contained"}>
           <Link className={classes.linkStyle} to="/addtask">
             Create Task
           </Link>
         </Button>
-        <Button className="btn">
+        <Button className="btn" variant={"contained"}>
           <Link className={classes.linkStyle} to="/tasks">
             View Tasks
           </Link>
         </Button>
       </ExpandMinimize>
-      <Button color="inherit" className="acc-btn">
+      <Button className="acc-btn" variant={"contained"}>
         <Link className={classes.linkStyle} to="/progress">
           Account
         </Link>
