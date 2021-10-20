@@ -1,21 +1,20 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import { Card} from "@mui/material";
+import { Card } from "@mui/material";
 
 import NavBar from "./components/NavBar/NavBar";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
-import Projects from "./components/pages/projects/Projects";
 import SideBar from "./components/SideBar/SideBar";
-import AddProject from "./components/pages/projects/AddProject";
-import Tasks from "./components/pages/tasks/Tasks"
+import Tasks from "./components/pages/tasks"
 
 import "./app.css";
-import ProjectTaskCreated from "./components/pages/ProjectTaskCreated";
-import AddTask from "./components/pages/tasks/AddTask";
 import Progress from "./components/pages/Progress";
 import ProtectedRouter from "./components/routerHandler/protectedRouter";
+import Projects from "./components/pages/Projects";
+import ProjectForm from "./components/pages/projectForm";
+import TaskForm from "./components/pages/taskForm";
 
 const App = () => {
   return (
@@ -29,11 +28,10 @@ const App = () => {
               <Switch>
                 <Route path="/signin" component={SignIn} />
                 <Route path="/signup" component={SignUp} />
-                <ProtectedRouter path="/projects" component={Projects} />
-                <ProtectedRouter path="/addproject" component={AddProject} />
+                <Route path="/dashboard" component={Projects} />
+                <Route path="/projectform" component={ProjectForm} />
+                <Route path="/taskform" component={TaskForm} />
                 <ProtectedRouter path="/tasks" component={Tasks} />
-                <ProtectedRouter path="/addtask" component={AddTask} />
-                <ProtectedRouter path="/dashboard" component={ProjectTaskCreated} />
                 <ProtectedRouter path="/progress" component={Progress} />
               </Switch>
             </div>

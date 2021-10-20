@@ -23,18 +23,6 @@ const SideBar = () => {
           Dashboard
         </Link>
       </Button>
-      <ExpandMinimize title="Projects bar">
-        <Button className="btn">
-          <Link className={classes.linkStyle} to="/addproject">
-            Create Project
-          </Link>
-        </Button>
-        <Button className="btn">
-          <Link className={classes.linkStyle} to="/projects">
-            View Projects
-          </Link>
-        </Button>
-      </ExpandMinimize>
       <ExpandMinimize title="Tasks bar">
         <Button className="btn">
           <Link className={classes.linkStyle} to="/addtask">

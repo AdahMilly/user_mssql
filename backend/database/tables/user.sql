@@ -12,3 +12,13 @@ ALTER TABLE users
 ADD role VARCHAR(50);
 
 SELECT * FROM users
+
+ALTER TABLE users
+ADD forgot_password VARCHAR(100)
+
+ALTER TABLE users
+ADD reset_password VARCHAR(100)
+
+
+
+

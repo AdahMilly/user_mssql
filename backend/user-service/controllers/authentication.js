@@ -67,4 +67,30 @@ module.exports = {
       res.status(500).send({ message: 'Internal Server Error' });
     }
   },
+  forgotPassword: async (req, res) => {
+    try {
+      const { email } = req.body;
+
+      if (email !== user.email){
+        res.send({message: 'User not registered'})
+      }
+
+      const { recordset } = await db.exec('forgotPassword', { email });
+      const forgetPassword = recordset[0]
+      res.send(email)
+      res.render(email)
+    } catch (error) {
+      console.log(error);
+    }
+    
+  },
+  resetPassword: async (req, res) => {
+    try {
+      const {email} = req.body
+      res.send(email)
+      res.render(email)
+    } catch (error) {
+      console.log(error)
+    }
+  },
 };
