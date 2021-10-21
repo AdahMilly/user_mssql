@@ -25,9 +25,7 @@ module.exports = {
       await db.exec('createProject', {
         project_name: project_name,
         user_name: user_name,
-        isDeleted: isDeleted,
         start_date: start_date,
-        isDeleted:0,
         end_date: end_date,
       });
       res.send({ message:"Project Created successfully" });

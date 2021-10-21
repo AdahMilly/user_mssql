@@ -1,24 +1,32 @@
-import { Button, Typography, TextField, Grid } from "@mui/material";
+import {
+  Button,
+  Typography,
+  TextField,
+  Grid,
+  CircularProgress,
+} from "@mui/material";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import AdapterDateMoment from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
-import { useSelector,useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { createProject } from "../../redux/actions/projectActions";
 
 import { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const ProjectForm = () => {
-  const dispatch = useDispatch()
-  const projectCreated = useSelector(state => state.projectCreated)
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const currentUser = useSelector(state => state.auth.user)
   const [project, setProject] = useState({
     project_name: "",
-    user_name: "",
+    user_name: currentUser.first_name +" "+ currentUser.last_name,
     description: "",
-    start_date: "",
-    end_date: "",
+    start_date: new Date(),
+    end_date: new Date(),
   });
+  const loading = useSelector((state) => state.projects.projectCreateLoading);
 
   const handleInputChange = (e) => {
     setProject((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -28,18 +36,17 @@ const ProjectForm = () => {
     setProject((prev) => ({ ...prev, [name]: value._d }));
   };
 
-  const handleSubmit = () =>{
-    console.log({project});
-    dispatch(createProject(project))
-    setProject({
-      project_name: "",
-      user_name: "",
-      description: "",
-      start_date: "",
-      end_date: "",
-    })
-  }
-  if(projectCreated.project._id) return <Redirect to="/dashboard"/>
+  const handleCreateCallback = (error) => {
+    if (error) {
+      console.log(error);
+    } else {
+      history.push("/dashboard");
+    }
+  };
+
+  const handleSubmit = () => {
+    dispatch(createProject(project, handleCreateCallback));
+  };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateMoment}>
@@ -82,8 +89,8 @@ const ProjectForm = () => {
               label="Owner"
               variant="standard"
               name="user_name"
-              value={project.user_name}
-              onChange={handleInputChange}
+              value={currentUser.first_name +" "+ currentUser.last_name}
+              disabled
             />
           </Grid>
           <Grid item xs={12}>
@@ -100,7 +107,7 @@ const ProjectForm = () => {
           <Grid item xs={12}>
             <DesktopDatePicker
               label="Start Date"
-              inputFormat="MM/dd/yyyy"
+              inputFormat="MM/DD/yyyy"
               name="start_date"
               value={project.start_date}
               onChange={(newValue) => {
@@ -112,7 +119,7 @@ const ProjectForm = () => {
           <Grid item xs={12}>
             <DesktopDatePicker
               label="End Date"
-              inputFormat="MM/dd/yyyy"
+              inputFormat="MM/DD/yyyy"
               name="end_date"
               value={project.end_date}
               onChange={(newValue) => {
@@ -121,14 +128,22 @@ const ProjectForm = () => {
               renderInput={(params) => <TextField fullWidth {...params} />}
             />
           </Grid>
-        </Grid>
-
-        <Grid gap={1} container justifyContent="space-evenly">
-        <Grid item xs={6}>
-          <Button onClick={handleSubmit} variant={"contained"}>Create</Button>
-          </Grid>
-          <Grid item xs={5}>
-          <Button  variant={"contained"}>Cancel</Button>
+          <Grid gap={1} container justifyContent="space-around">
+            <Grid item xs={6}>
+              <Button
+                onClick={handleSubmit}
+                variant={"contained"}
+                disabled={loading}
+                iconStart={loading && <CircularProgress size={20} />}
+              >
+                Create
+              </Button>
+            </Grid>
+            <Grid item xs={5}>
+              <Button disabled={loading} variant={"contained"}>
+                Cancel
+              </Button>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

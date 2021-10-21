@@ -1,24 +1,29 @@
+import { PROJECT_CREATE_, ERROR, LOADING, SUCCESS } from "../types";
+
 const initialState = {
     project: {},
+    projectCreateLoading: false,
 }
 
 const projectReducer = (state = initialState, action) => {
+    
     switch (action.type) {
-        case "createProject":
+        case `${PROJECT_CREATE_}${LOADING}`:
             return {
                 ...state,
-                project: action.project
+                projectCreateLoading: true,
             };
-        case "loginUser":
-            try {
-                return {
-                    ...state,
-                    project: action.project
-                };
+        case `${PROJECT_CREATE_}${SUCCESS}`:
+            return {
+                ...state,
+                projectCreateLoading: false,
+            };
+        case `${PROJECT_CREATE_}${ERROR}`:
+            return {
+                ...state,
+                projectCreateLoading: false,
+            };
 
-            } catch (error) {
-                console.log(error);
-            } break
 
         default: return state
     }

@@ -1,23 +1,18 @@
 
 import axios from "axios";
+import projectActionCreators from "../actionCreators/project.actions";
 
-console.log(process.env);
-
-export const createProject = (project) => {
-    return(dispatch) => {
-        axios.post(`${process.env.REACT_APP_PROJECT_TASK_URL}/create/createProject`, project)
-        .then(({data}) => {
-            const {project} = data;
-            console.log(data);
-
-            localStorage.setItem("project")
-            dispatch({
-                type: "createProject",
-                project
+export const createProject = (project, callback = () => null) => {
+    return (dispatch) => {
+        dispatch(projectActionCreators.createProjectLoading())
+        axios.post(`${process.env.REACT_APP_PROJECT_TASK_URL}/project/create`, project)
+            .then((res) => {
+                dispatch(projectActionCreators.createProjectSuccess())
+                callback()
             })
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .catch(error => {
+                dispatch(projectActionCreators.createProjectError())
+                callback(error);
+            })
     }
 }
