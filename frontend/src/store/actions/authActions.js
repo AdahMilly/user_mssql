@@ -1,14 +1,20 @@
-import {useFetch} from "./useFetch";
+
+import axios from "axios";
 import {URL} from "../../backend/index";
 
-export const SignUp = () => {
-    const {loading, error, data} =useFetch(URL)
+export const signUp = (user) => {
     return(dispatch) => {
-        // 
+        axios.post(`${URL}auth/registerUser`, user)
+        .then(token => {
 
-        // if (loading) return "Loading..."
-        // if (error) return "Something went wrong"
+            localStorage.setItem("token", token.data)
+            dispatch({
+                type: "registerUser",
+                token: "token.data"
+            })
+        })
+        .catch(error => {
+            console.log(error.response);
+        })
     }
-
-    return <div></div>
 }

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { useSelector,useDispatch } from "react-redux";
 
-import {URL} from  "../../backend/index"
+import { signUp } from "../../store/actions/authActions";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, Button } from "@material-ui/core";
-import useFetch from "../../hooks/useFetch";
 
 const useStyles = makeStyles({
   formStyle: {
@@ -21,6 +21,7 @@ const useStyles = makeStyles({
 
 const SignUp = () => {
   const classes = useStyles();
+  const dispatch = useDispatch()
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -28,14 +29,15 @@ const SignUp = () => {
     password: "",
   });
 
-    const {loading, error, data, methodFunctions} = useFetch(URL+"auth/registerUser",{method:"POST"})
-
-    console.log({loading, error,data})
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    methodFunctions(user)
-    setUser({ firstName: "",  lastName: "", email: "", password: "" });
+    dispatch(signUp(user))
+    setUser({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    })
   };
 
 
