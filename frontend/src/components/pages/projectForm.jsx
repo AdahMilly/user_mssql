@@ -1,10 +1,27 @@
 import { Button, Typography, TextField, Grid } from "@mui/material";
 import React from "react";
 
+// import {
+//   MuiPickersUtilsProvider,
+//   DatePicker,
+//   TimePicker,
+//   DateTimePicker,
+// } from "@material-ui/pickers";
+// import DateMomentUtils from "@date-io/moment";
+import {  MuiPickersUtilsProvider } from "@material-ui/pickers";
+
+import { useState } from "react";
+
 const ProjectForm = () => {
+  const [selectedDate, handleDateChange] = useState(new Date());
   return (
-    <form >
-      <Grid spacing={2} container justifyContent="center" style={{height: '80vh'}}>
+    <form>
+      <Grid
+        spacing={2}
+        container
+        justifyContent="center"
+        style={{ height: "80vh" }}
+      >
         <Grid
           container
           alignItems="center"
@@ -44,22 +61,31 @@ const ProjectForm = () => {
               variant="standard"
             />
           </Grid>
-
           <Grid item xs={12}>
-            <TextField
-              fullWidth
-              id="standard-basic"
-              label="Start Date"
-              variant="standard"
-            />
+          <MuiPickersUtilsProvider
+        clearable
+        value={selectedDate}
+        placeholder="10/10/2018"
+        onChange={date => handleDateChange(date)}
+        minDate={new Date()}
+        format="MM/dd/yyyy"
+      />
+          {/* <MuiPickersUtilsProvider utils={DateMomentUtils}>
+          <DatePicker value={selectedDate} onChange={handleDateChange} />
+          </MuiPickersUtilsProvider> */}
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              id="standard-basic"
-              label="End Date"
-              variant="standard"
-            />
+          <MuiPickersUtilsProvider
+        clearable
+        value={selectedDate}
+        placeholder="10/10/2018"
+        onChange={date => handleDateChange(date)}
+        minDate={new Date()}
+        format="MM/dd/yyyy"
+      />
+          {/* <Grid item xs={12}>
+          <MuiPickersUtilsProvider utils={DateMomentUtils}>
+          <DatePicker value={selectedDate} onChange={handleDateChange} />
+          </MuiPickersUtilsProvider> */}
           </Grid>
 
           <Grid item xs={12} container justifyContent="space-evenly">
@@ -67,7 +93,6 @@ const ProjectForm = () => {
             <Button variant={"contained"}>Cancel</Button>
           </Grid>
         </Grid>
-      </Grid>
     </form>
   );
 };
