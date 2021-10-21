@@ -3,18 +3,15 @@ import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import AdapterDateMoment from "@mui/lab/AdapterMoment";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
-// import {
-//   MuiPickersUtilsProvider,
-//   DatePicker,
-//   TimePicker,
-//   DateTimePicker,
-// } from "@material-ui/pickers";
-// import DateMomentUtils from "@date-io/moment";
-// import {  MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { useSelector,useDispatch } from "react-redux";
+import { createProject } from "../../redux/actions/projectActions";
 
 import { useState } from "react";
+import { Redirect } from "react-router-dom";
 
 const ProjectForm = () => {
+  const dispatch = useDispatch()
+  const projectCreated = useSelector(state => state.projectCreated)
   const [project, setProject] = useState({
     project_name: "",
     user_name: "",
@@ -33,7 +30,16 @@ const ProjectForm = () => {
 
   const handleSubmit = () =>{
     console.log({project});
+    dispatch(createProject(project))
+    setProject({
+      project_name: "",
+      user_name: "",
+      description: "",
+      start_date: "",
+      end_date: "",
+    })
   }
+  if(projectCreated.project._id) return <Redirect to="/dashboard"/>
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateMoment}>
@@ -119,10 +125,10 @@ const ProjectForm = () => {
 
         <Grid gap={1} container justifyContent="space-evenly">
         <Grid item xs={6}>
-          <Button onClick={handleSubmit} fullWidth variant={"contained"}>Create</Button>
+          <Button onClick={handleSubmit} variant={"contained"}>Create</Button>
           </Grid>
           <Grid item xs={5}>
-          <Button fullWidth variant={"contained"}>Cancel</Button>
+          <Button  variant={"contained"}>Cancel</Button>
           </Grid>
         </Grid>
       </Grid>

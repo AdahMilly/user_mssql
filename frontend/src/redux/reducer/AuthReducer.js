@@ -1,6 +1,3 @@
-import jwtDecode from "jwt-decode"
-
-
 
 const initialState = {
     user: {},
@@ -8,7 +5,6 @@ const initialState = {
 
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        // case "USER_LOADED":
         case "registerUser":
             return {
                 ...state,

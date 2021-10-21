@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import { Redirect } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { signIn } from "../../store/actions/authActions";
+import { signIn } from "../../redux/actions/authActions";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, Button } from "@material-ui/core";
