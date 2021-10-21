@@ -1,42 +1,46 @@
 
 import axios from "axios";
+import { setUserAndToken } from "../../utils/setUser";
+import authActionCreators from "../actionCreators/auth.actions";
 
-const {REACT_APP_API_URL} = process.env;
+const { REACT_APP_API_URL } = process.env;
 
 export const signUp = (user) => {
-    return(dispatch) => {
-        axios.post(`${REACT_APP_API_URL}auth/registerUser`, user)
-        .then(({data}) => {
-            const {token, user} = data;
-            console.log(data);
+    return (dispatch) => {
+        axios.post(`${REACT_APP_API_URL}/auth/registerUser`, user)
+            .then(({ data }) => {
+                const { token, user } = data;
 
-            localStorage.setItem("token", token)
-            dispatch({
-                type: "registerUser",
-                user
+                localStorage.setItem("token", token)
+                dispatch({
+                    type: "registerUser",
+                    user
+                })
             })
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .catch(error => {
+                console.log(error);
+            })
     }
 }
 
-export const signIn = (credentials) => {
-    return(dispatch) => {
-        axios.post(`${REACT_APP_API_URL}auth/loginUser`, credentials)
-        .then(token => {
-            console.log(token);
+export const signIn = (credentials, callback = () => null) => {
+    return (dispatch) => {
 
-            localStorage.setItem("token", token.data)
-            dispatch({
-                type: "loginUser",
-                token: "token.data"
+        dispatch(authActionCreators.userSignInLoading())
+
+        axios.post(`${REACT_APP_API_URL}/auth/loginUser`, credentials)
+            .then(res => {
+
+                const { user, token } = res.data;
+
+                setUserAndToken(user, token)
+                dispatch(authActionCreators.userSignInSuccess(user))
+                callback()
             })
-        })
-        .catch(error => {
-            console.log(error.response);
-        })
+            .catch(error => {
+                callback(error)
+                dispatch(authActionCreators.userSignInError())
+            })
     }
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 // import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -17,13 +17,20 @@ import ProtectedRouter from "./components/routerHandler/protectedRouter";
 import Projects from "./components/pages/Projects";
 import ProjectForm from "./components/pages/projectForm";
 import TaskForm from "./components/pages/taskForm";
+import { getUser } from "./utils/setUser";
+import { useDispatch } from "react-redux";
+import authActionCreators from "./redux/actionCreators/auth.actions";
 
 const App = () => {
-  // const dispatch = useDispatch()
+  const user = getUser();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(loadUser())
-  // }, [dispatch])
+  useEffect(() => {
+    if (user) {
+      dispatch(authActionCreators.userSignInSuccess(user))
+    }
+  }, [user, dispatch])
+
   return (
     <>
       <Router>

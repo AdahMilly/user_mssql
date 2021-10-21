@@ -1,14 +1,12 @@
-import React, { useState} from "react";
-import { Redirect } from "react-router-dom";
-
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../redux/actions/authActions";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, Button } from "@material-ui/core";
 
-import { withRouter } from "react-router";
-
+import { useHistory, withRouter } from "react-router";
+import { CircularProgress } from "@mui/material";
 
 const useStyles = makeStyles({
   formStyle: {
@@ -16,7 +14,7 @@ const useStyles = makeStyles({
     padding: "30px",
     borderRadius: "9px",
     boxShadow: "0px 0px 12px -3px #000000",
-    width:"40%"
+    width: "40%",
   },
   spacing: {
     marginTop: "20px",
@@ -25,27 +23,30 @@ const useStyles = makeStyles({
 
 const SignIn = () => {
   const classes = useStyles();
+  const history = useHistory();
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth)
+  const loading = useSelector((state) => state.auth?.singInLoading);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
 
+  const handleSingInCallback = (error) => {
+    if (error) {
+      console.log(error);
+    } else {
+      history.push("/dashboard");
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signIn(credentials))
-    setCredentials({
-      email:"",
-      password:"",
-    })
+    dispatch(signIn(credentials, handleSingInCallback));
   };
-  if(auth._id) return <Redirect to="/dashboard"/>
 
   const onLogin = () => {
-    window.localStorage.setItem("isAuthenticated", true)
-  }
-
+    window.localStorage.setItem("isAuthenticated", true);
+  };
 
   return (
     <>
@@ -63,7 +64,9 @@ const SignIn = () => {
           variant="outlined"
           fullWidth
           value={credentials.email}
-          onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
+          onChange={(e) =>
+            setCredentials({ ...credentials, email: e.target.value })
+          }
         />
         <TextField
           className={classes.spacing}
@@ -73,7 +76,9 @@ const SignIn = () => {
           variant="outlined"
           fullWidth
           value={credentials.password}
-          onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
+          onChange={(e) =>
+            setCredentials({ ...credentials, password: e.target.value })
+          }
         />
         <Button
           variant="contained"
@@ -81,6 +86,8 @@ const SignIn = () => {
           className={classes.spacing}
           type="submit"
           onClick={onLogin}
+          disabled={loading}
+          startIcon={loading && <CircularProgress size={20} />}
         >
           SignIn
         </Button>

@@ -6,7 +6,7 @@ CREATE TABLE projects
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
 )
-
+SELECT * from users
 
 ALTER TABLE projects
 ADD isDeleted INT DEFAULT 0
