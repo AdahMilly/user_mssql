@@ -20,13 +20,14 @@ module.exports = {
     }
   },
   createOne: async (req, res) => {
-    const { project_name, user_name, isDeleted, start_date, end_date } = req.body;
+    const { project_name, user_name, start_date, end_date } = req.body;
     try {
       await db.exec('createProject', {
         project_name: project_name,
         user_name: user_name,
         isDeleted: isDeleted,
         start_date: start_date,
+        isDeleted:0,
         end_date: end_date,
       });
       res.send({ message:"Project Created successfully" });

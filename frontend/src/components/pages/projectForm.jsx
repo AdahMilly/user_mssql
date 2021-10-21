@@ -1,5 +1,7 @@
 import { Button, Typography, TextField, Grid } from "@mui/material";
-import React from "react";
+import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
+import AdapterDateMoment from "@mui/lab/AdapterMoment";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 
 // import {
 //   MuiPickersUtilsProvider,
@@ -8,14 +10,33 @@ import React from "react";
 //   DateTimePicker,
 // } from "@material-ui/pickers";
 // import DateMomentUtils from "@date-io/moment";
-import {  MuiPickersUtilsProvider } from "@material-ui/pickers";
+// import {  MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 import { useState } from "react";
 
 const ProjectForm = () => {
-  const [selectedDate, handleDateChange] = useState(new Date());
+  const [project, setProject] = useState({
+    project_name: "",
+    user_name: "",
+    description: "",
+    start_date: "",
+    end_date: "",
+  });
+
+  const handleInputChange = (e) => {
+    setProject((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleDateChange = (name, value) => {
+    setProject((prev) => ({ ...prev, [name]: value._d }));
+  };
+
+  const handleSubmit = () =>{
+    console.log({project});
+  }
+
   return (
-    <form>
+    <LocalizationProvider dateAdapter={AdapterDateMoment}>
       <Grid
         spacing={2}
         container
@@ -42,6 +63,9 @@ const ProjectForm = () => {
               id="standard-basic"
               label="Project name"
               variant="standard"
+              name="project_name"
+              value={project.project_name}
+              onChange={handleInputChange}
             />
           </Grid>
 
@@ -51,6 +75,9 @@ const ProjectForm = () => {
               id="standard-basic"
               label="Owner"
               variant="standard"
+              name="user_name"
+              value={project.user_name}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -59,41 +86,47 @@ const ProjectForm = () => {
               id="standard-basic"
               label="Description"
               variant="standard"
+              name="description"
+              value={project.description}
+              onChange={handleInputChange}
             />
           </Grid>
           <Grid item xs={12}>
-          <MuiPickersUtilsProvider
-        clearable
-        value={selectedDate}
-        placeholder="10/10/2018"
-        onChange={date => handleDateChange(date)}
-        minDate={new Date()}
-        format="MM/dd/yyyy"
-      />
-          {/* <MuiPickersUtilsProvider utils={DateMomentUtils}>
-          <DatePicker value={selectedDate} onChange={handleDateChange} />
-          </MuiPickersUtilsProvider> */}
+            <DesktopDatePicker
+              label="Start Date"
+              inputFormat="MM/dd/yyyy"
+              name="start_date"
+              value={project.start_date}
+              onChange={(newValue) => {
+                handleDateChange("start_date", newValue);
+              }}
+              renderInput={(params) => <TextField fullWidth {...params} />}
+            />
           </Grid>
-          <MuiPickersUtilsProvider
-        clearable
-        value={selectedDate}
-        placeholder="10/10/2018"
-        onChange={date => handleDateChange(date)}
-        minDate={new Date()}
-        format="MM/dd/yyyy"
-      />
-          {/* <Grid item xs={12}>
-          <MuiPickersUtilsProvider utils={DateMomentUtils}>
-          <DatePicker value={selectedDate} onChange={handleDateChange} />
-          </MuiPickersUtilsProvider> */}
-          </Grid>
-
-          <Grid item xs={12} container justifyContent="space-evenly">
-            <Button variant={"contained"}>Create</Button>
-            <Button variant={"contained"}>Cancel</Button>
+          <Grid item xs={12}>
+            <DesktopDatePicker
+              label="End Date"
+              inputFormat="MM/dd/yyyy"
+              name="end_date"
+              value={project.end_date}
+              onChange={(newValue) => {
+                handleDateChange("end_date", newValue);
+              }}
+              renderInput={(params) => <TextField fullWidth {...params} />}
+            />
           </Grid>
         </Grid>
-    </form>
+
+        <Grid gap={1} container justifyContent="space-evenly">
+        <Grid item xs={6}>
+          <Button onClick={handleSubmit} fullWidth variant={"contained"}>Create</Button>
+          </Grid>
+          <Grid item xs={5}>
+          <Button fullWidth variant={"contained"}>Cancel</Button>
+          </Grid>
+        </Grid>
+      </Grid>
+    </LocalizationProvider>
   );
 };
 

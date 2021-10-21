@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 
 import { signUp } from "../../store/actions/authActions";
 
@@ -22,6 +23,7 @@ const useStyles = makeStyles({
 const SignUp = () => {
   const classes = useStyles();
   const dispatch = useDispatch()
+  const auth = useSelector(state => state.auth)
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -39,6 +41,10 @@ const SignUp = () => {
       password: "",
     })
   };
+
+  if(auth.user._id) return <Redirect to="/dashboard"/>
+
+  console.log({auth});
 
 
   return (

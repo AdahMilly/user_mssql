@@ -11,9 +11,7 @@ BEGIN
         u.last_name,
         u.email,
         u.password,
-        u.isDeleted,
-        u.role
-
+        u.isDeleted
     FROM [users] u
     WHERE _id=@_id;
 end;

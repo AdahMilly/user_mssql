@@ -53,15 +53,18 @@ module.exports = {
     const { firstName:first_name, email, lastName: last_name } = req.body;
     const id = uuidv4();
     try {
-      const result = await db.exec('registerUser', {
+      await db.exec('registerUser', {
         id,
         first_name,
         last_name,
         password,
         email,
       });
-      console.log({result});
-      res.send({ message: 'User registered successfully' });
+      const {recordset} = await db.exec('userGet', {_id: id});
+      const user = recordset[0];
+
+      const token = generateToken(user.first_name,user.last_name,user.password,user.email, user._id);
+      res.send({ message: 'User registered successfully' ,token, user});
     } catch (error) {
       console.log(error)
       res.status(500).send({ message: 'Internal Server Error' });

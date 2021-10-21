@@ -1,11 +1,12 @@
 import React, { useState} from "react";
+import { Redirect } from "react-router-dom";
 
-import useFetch from "../../hooks/useFetch"
+import { useDispatch, useSelector } from "react-redux";
+import { signIn } from "../../store/actions/authActions";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, Button } from "@material-ui/core";
 
-import { URL } from "../../backend/index";
 import { withRouter } from "react-router";
 
 
@@ -24,20 +25,22 @@ const useStyles = makeStyles({
 
 const SignIn = () => {
   const classes = useStyles();
-  const [credential, setCredential] = useState({
+  const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth)
+  const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
 
-  const {loading, error, data, methodFunctions} = useFetch(URL+"auth/loginUser",{method:"POST"})
-
-  console.log({loading, error,data})
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    methodFunctions(credential)
-    setCredential({ email: "", password: "" });
+    dispatch(signIn(credentials))
+    setCredentials({
+      email:"",
+      password:"",
+    })
   };
+  if(auth._id) return <Redirect to="/dashboard"/>
 
   const onLogin = () => {
     window.localStorage.setItem("isAuthenticated", true)
@@ -59,8 +62,8 @@ const SignIn = () => {
           label="enterEmail"
           variant="outlined"
           fullWidth
-          value={credential.email}
-          onChange={(e) => setCredential({ ...credential, email: e.target.value })}
+          value={credentials.email}
+          onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
         />
         <TextField
           className={classes.spacing}
@@ -69,8 +72,8 @@ const SignIn = () => {
           label="enterPassword"
           variant="outlined"
           fullWidth
-          value={credential.password}
-          onChange={(e) => setCredential({ ...credential, password: e.target.value })}
+          value={credentials.password}
+          onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
         />
         <Button
           variant="contained"

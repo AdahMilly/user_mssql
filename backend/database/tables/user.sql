@@ -11,6 +11,8 @@ CREATE TABLE users
 ALTER TABLE users
 ADD role VARCHAR(50);
 
+ALTER TABLE users 
+DROP COLUMN role
 
 
 

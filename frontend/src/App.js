@@ -1,4 +1,5 @@
 import React from "react";
+// import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { Card } from "@mui/material";
@@ -8,6 +9,7 @@ import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import SideBar from "./components/SideBar/SideBar";
 import Tasks from "./components/pages/tasks"
+// import { loadUser } from "./store/actions/authActions";
 
 import "./app.css";
 import Progress from "./components/pages/Progress";
@@ -17,10 +19,15 @@ import ProjectForm from "./components/pages/projectForm";
 import TaskForm from "./components/pages/taskForm";
 
 const App = () => {
+  // const dispatch = useDispatch()
+
+  // useEffect(() => {
+  //   dispatch(loadUser())
+  // }, [dispatch])
   return (
     <>
       <Router>
-        <Card maxWidth="md">
+        <Card>
           <div class="app">
             <NavBar />
             <SideBar />
