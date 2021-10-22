@@ -21,6 +21,5 @@ BEGIN
         ORDER BY p.project_name
         OFFSET (@PageNumber * @NumberOfRecordsPerPage) ROWS
         FETCH NEXT @NumberOfRecordsPerPage ROWS ONLY
-        FOR JSON PATH, INCLUDE_NULL_VALUES
     END
 END

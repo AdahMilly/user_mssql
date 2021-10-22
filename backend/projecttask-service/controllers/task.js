@@ -3,7 +3,10 @@ const db = require('../db');
 module.exports = {
   getAll: async (req, res) => {
     try {
-      const { recordset } = await db.exec('GetAllTasks');
+      
+      const { recordset } = await db.exec('GetAllTasks',{
+        project_id: req.query.project_id
+      });
       res.send({ tasks: recordset });
     } catch (error) {
       console.log(error);
@@ -33,7 +36,7 @@ module.exports = {
         start_date: start_date,
         end_date: end_date,
       });
-      return res.status(500).send({ message: 'Task created successfully' });
+      return res.status(201).send({ message: 'Task created successfully' });
     } catch (error) {
       console.log(error);
     }

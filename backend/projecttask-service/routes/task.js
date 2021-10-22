@@ -8,6 +8,6 @@ router.get('/one/:id', getOne);
 
 router.post('/create', createOne);
 
-router.post('/complete/:id', markTaskAsComplete);
+router.put('/complete/:id', markTaskAsComplete);
 
 module.exports = router;

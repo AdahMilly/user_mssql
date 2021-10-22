@@ -8,7 +8,6 @@ import NavBar from "./components/NavBar/NavBar";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import SideBar from "./components/SideBar/SideBar";
-import Tasks from "./components/pages/tasks"
 // import { loadUser } from "./store/actions/authActions";
 
 import "./app.css";
@@ -20,6 +19,8 @@ import TaskForm from "./components/pages/taskForm";
 import { getUser } from "./utils/setUser";
 import { useDispatch } from "react-redux";
 import authActionCreators from "./redux/actionCreators/auth.actions";
+import AddTask from "./components/pages/AddTask";
+import Tasks from "./components/pages/tasks";
 
 const App = () => {
   const user = getUser();
@@ -45,7 +46,8 @@ const App = () => {
                 <Route path="/dashboard" component={Projects} />
                 <Route path="/projectform" component={ProjectForm} />
                 <Route path="/taskform" component={TaskForm} />
-                <ProtectedRouter path="/tasks" component={Tasks} />
+                <Route path="/addtask/:project_id" component={AddTask} />
+                <Route path="/tasks/:project_id" component={Tasks} />
                 <ProtectedRouter path="/progress" component={Progress} />
               </Switch>
             </div>

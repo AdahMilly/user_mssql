@@ -16,3 +16,18 @@ export const createProject = (project, callback = () => null) => {
             })
     }
 }
+
+export const getProjects = (params, callback = () => null) => {
+    return (dispatch) => {
+        dispatch(projectActionCreators.getProjectsLoading())
+        axios.get(`${process.env.REACT_APP_PROJECT_TASK_URL}/project/all`)
+            .then((res) => {
+                const { projects } = res.data;
+                dispatch(projectActionCreators.getProjectsSuccess(projects))
+            })
+            .catch(error => {
+                dispatch(projectActionCreators.getProjectsError())
+                callback(error)
+            })
+    }
+}

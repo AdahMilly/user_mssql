@@ -1,11 +1,10 @@
 import React from "react";
 import "./SideBar.css";
 
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { Button } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import ExpandMinimize from "../ExpandMinimize/ExpandMinimize";
 
 const useStyles = makeStyles({
   linkStyle: {
@@ -18,27 +17,20 @@ const SideBar = () => {
   const classes = useStyles();
   return (
     <div className="sidebar">
-      <Button variant={"outlined"} style={{width:"100px", alignSelf:"center"}}>
-        <Link className={classes.linkStyle} to="/dashboard">
+        <NavLink className={classes.linkStyle} to="/dashboard" style={{width:"100px", alignSelf:"center"}}>
           Dashboard
-        </Link>
-      </Button>
-      <ExpandMinimize title="Tasks bar">
-        <Button className="btn" variant={"outlined"}>
-          <Link className={classes.linkStyle} to="/addtask">
+        </NavLink>
+
+          <NavLink className={classes.linkStyle} to="/addtask" style={{width:"100px", alignSelf:"center"}}>
             Create Task
-          </Link>
-        </Button>
-        <Button className="btn" variant={"outlined"}>
-          <Link className={classes.linkStyle} to="/tasks">
+          </NavLink>
+          <NavLink className={classes.linkStyle} to="/tasks" style={{width:"100px", alignSelf:"center"}}>
             View Tasks
-          </Link>
-        </Button>
-      </ExpandMinimize>
+          </NavLink>
       <Button className="acc-btn" variant={"outlined"} style={{width:"100px", alignSelf:"center"}}>
-        <Link className={classes.linkStyle} to="/progress">
+        <NavLink className={classes.linkStyle} to="/progress">
           Account
-        </Link>
+        </NavLink>
       </Button>
     </div>
   );
