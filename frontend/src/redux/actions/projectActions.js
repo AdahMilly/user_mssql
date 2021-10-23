@@ -31,3 +31,17 @@ export const getProjects = (params, callback = () => null) => {
             })
     }
 }
+export const deleteProject = (project, callback = () => null) => {
+    return (dispatch) => {
+        dispatch(projectActionCreators.createProjectLoading())
+        axios.delete(`${process.env.REACT_APP_PROJECT_TASK_URL}/project/delete/:id`, project)
+            .then((res) => {
+                dispatch(projectActionCreators.deleteProjectSuccess())
+                callback()
+            })
+            .catch(error => {
+                dispatch(projectActionCreators.deleteProjectError())
+                callback(error);
+            })
+    }
+}
