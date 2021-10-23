@@ -1,5 +1,6 @@
 CREATE OR ALTER PROCEDURE [dbo].[GetAllProjects]
 (
+    @isDeleted INT=1,
     @project_id int = null,
     @PageNumber INT = 0,
     @NumberOfRecordsPerPage INT = 100
@@ -17,6 +18,7 @@ BEGIN
     ELSE
     BEGIN
         SELECT * FROM dbo.projects p
+        WHERE isDeleted = 0
         ORDER BY p.project_name
         OFFSET (@PageNumber * @NumberOfRecordsPerPage) ROWS
         FETCH NEXT @NumberOfRecordsPerPage ROWS ONLY
