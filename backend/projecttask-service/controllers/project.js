@@ -2,7 +2,9 @@ const db = require('../db');
 
 module.exports = {
   getAll: async (req, res) => {
-      const { recordset } = await db.exec('GetAllProjects');
+      const { recordset } = await db.exec('GetAllProjects', {
+        project_id: req.query.project_id
+      });
       res.send({ projects: recordset });
   },
   getOne: async (req, res) => {
