@@ -13,7 +13,6 @@ BEGIN
     BEGIN
         SELECT * FROM dbo.projects
         WHERE _id = @project_id
-        FOR JSON PATH, INCLUDE_NULL_VALUES
     END
     ELSE
     BEGIN
@@ -21,5 +20,6 @@ BEGIN
         ORDER BY p.project_name
         OFFSET (@PageNumber * @NumberOfRecordsPerPage) ROWS
         FETCH NEXT @NumberOfRecordsPerPage ROWS ONLY
+
     END
 END
