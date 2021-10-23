@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router";
-import { Button, Grid, Paper, Typography } from "@mui/material";
+import { Button, Grid, IconButton, Paper, Typography } from "@mui/material";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import EditIcon from "@mui/icons-material/Edit";
 import { makeStyles } from "@mui/styles";
 
 import { useHistory } from "react-router-dom";
@@ -88,36 +90,52 @@ const Projects = () => {
 
 export const ProjectItem = ({ project, classes, history }) => {
   const handleClick = () => {
-    history.push(`/tasks/${project._id}`)
+    history.push(`/tasks/${project._id}`);
   };
   return (
     <Grid item xs={12} md={6} lg={4} xl={3}>
       <Paper className={classes.paper} onClick={handleClick}>
         <Grid
-          flexDirection="column"
           container
-          direction="column"
-          // alignItems=""
-          justifyContent="flex-end"
+          alignItems="flex-end"
+          justifyContent="center"
           style={{ height: "100%" }}
         >
           <Grid item>
             <AiOutlineFundProjectionScreen className={classes.icon} />
           </Grid>
-          <Grid item style={{ margin: "30px 0" }}>
+          <Grid item style={{ margin: "30px 0" }} xs={12}>
             <Typography variant={"h5"} style={{ textTransform: "capitalize" }}>
               <strong>Title: </strong>
               {project.project_name}
             </Typography>
           </Grid>
-          <Grid item style={{ margin: "30px 0" }}>
+          <Grid item style={{ margin: "30px 0" }} xs={12}>
             <Typography variant="subtitle2">
               <strong>Duration: </strong>
               {moment(project.start_date).format("MMMM Do YYYY")} to{" "}
               {moment(project.end_date).format("MMMM Do YYYY")}
             </Typography>
           </Grid>
-          <Grid item></Grid>
+          <Grid
+            direction="row"
+            container
+            xs={12}
+            spacing={2}
+            justifyContent="center"
+          >
+            <Grid item>
+              <IconButton>
+                <DeleteRoundedIcon />
+              </IconButton>
+            </Grid>
+
+            <Grid item>
+              <IconButton>
+                <EditIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
         </Grid>
       </Paper>
     </Grid>

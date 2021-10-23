@@ -17,16 +17,9 @@ const SideBar = () => {
   const classes = useStyles();
   return (
     <div className="sidebar">
-        <NavLink className={classes.linkStyle} to="/dashboard" style={{width:"100px", alignSelf:"center"}}>
+        <NavLink className={classes.linkStyle} to="/dashboard" style={{width:"100px", alignSelf:"center",border:"solid",margin:"20px",padding:"15px",fontSize:"1.2rem"}}>
           Dashboard
         </NavLink>
-
-          <NavLink className={classes.linkStyle} to="/addtask" style={{width:"100px", alignSelf:"center"}}>
-            Create Task
-          </NavLink>
-          <NavLink className={classes.linkStyle} to="/tasks" style={{width:"100px", alignSelf:"center"}}>
-            View Tasks
-          </NavLink>
       <Button className="acc-btn" variant={"outlined"} style={{width:"100px", alignSelf:"center"}}>
         <NavLink className={classes.linkStyle} to="/progress">
           Account
