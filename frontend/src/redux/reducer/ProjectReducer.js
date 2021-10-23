@@ -1,4 +1,4 @@
-import { PROJECT_CREATE_, ERROR, LOADING, SUCCESS, GET_PROJECTS_ } from "../types";
+import { PROJECT_CREATE_, ERROR, LOADING, SUCCESS, GET_PROJECTS_ ,DELETE_PROJECT_} from "../types";
 
 const initialState = {
     projects: [],
@@ -41,6 +41,23 @@ const projectReducer = (state = initialState, action) => {
                 projectsLoading: false
 
             }
+            case `${DELETE_PROJECT_}${LOADING}`:
+                return {
+                    ...state,
+                    projectLoading: true,
+                }
+            case `${DELETE_PROJECT_}${SUCCESS}`:
+                return {
+                    ...state,
+                    project: action.payload.project,
+                    projectLoading: false
+                }
+            case `${DELETE_PROJECT_}${ERROR}`:
+                return {
+                    ...state,
+                    projectLoading: false
+    
+                }
 
 
         default: return state
