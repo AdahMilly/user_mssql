@@ -32,10 +32,10 @@ const deleteProjectLoading = () => ({
     type: `${DELETE_PROJECT_}${LOADING}`
 })
 
-const deleteProjectSuccess = (project = []) => ({
+const deleteProjectSuccess = (projectId) => ({
     type: `${DELETE_PROJECT_}${SUCCESS}`,
     payload: {
-        project
+        projectId
     }
 })
 

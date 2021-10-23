@@ -11,11 +11,12 @@ import { FaUserFriends } from "react-icons/fa";
 import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getProjects } from "../../redux/actions/projectActions";
+import { deleteProject } from "../../redux/actions/projectActions";
 import moment from "moment";
 
 const useStyles = makeStyles({
   paper: {
-    height: "300px",
+    minHeight: "300px",
     padding: "10px",
     cursor: "pointer",
     "&:hover": {
@@ -62,7 +63,9 @@ const Projects = () => {
               direction="column"
               alignItems="center"
               justifyContent="space-evenly"
+              justifyItems="stretch"
               style={{ height: "100%" }}
+              spacing={3}
             >
               <Grid item>
                 <FaUserFriends className={classes.icon} />
@@ -89,28 +92,35 @@ const Projects = () => {
 };
 
 export const ProjectItem = ({ project, classes, history }) => {
+  const dispatch = useDispatch();
   const handleClick = () => {
     history.push(`/tasks/${project._id}`);
   };
+
+  const handleDelete = (e) => {
+    e.stopPropagation();
+    dispatch(deleteProject(project._id));
+  };
+
   return (
     <Grid item xs={12} md={6} lg={4} xl={3}>
       <Paper className={classes.paper} onClick={handleClick}>
         <Grid
           container
-          alignItems="flex-end"
           justifyContent="center"
           style={{ height: "100%" }}
+          spacing={3}
         >
           <Grid item>
             <AiOutlineFundProjectionScreen className={classes.icon} />
           </Grid>
-          <Grid item style={{ margin: "30px 0" }} xs={12}>
+          <Grid item style={{ margin: "10px 0" }} xs={12}>
             <Typography variant={"h5"} style={{ textTransform: "capitalize" }}>
               <strong>Title: </strong>
               {project.project_name}
             </Typography>
           </Grid>
-          <Grid item style={{ margin: "30px 0" }} xs={12}>
+          <Grid item style={{ margin: "10px 0" }} xs={12}>
             <Typography variant="subtitle2">
               <strong>Duration: </strong>
               {moment(project.start_date).format("MMMM Do YYYY")} to{" "}
@@ -125,7 +135,7 @@ export const ProjectItem = ({ project, classes, history }) => {
             justifyContent="center"
           >
             <Grid item>
-              <IconButton>
+              <IconButton onClick={handleDelete}>
                 <DeleteRoundedIcon />
               </IconButton>
             </Grid>

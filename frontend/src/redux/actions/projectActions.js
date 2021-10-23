@@ -31,12 +31,12 @@ export const getProjects = (params, callback = () => null) => {
             })
     }
 }
-export const deleteProject = (project, callback = () => null) => {
+export const deleteProject = (id, callback = () => null) => {
     return (dispatch) => {
-        dispatch(projectActionCreators.createProjectLoading())
-        axios.delete(`${process.env.REACT_APP_PROJECT_TASK_URL}/project/delete/:id`, project)
+        dispatch(projectActionCreators.deleteProjectLoading())
+        axios.delete(`${process.env.REACT_APP_PROJECT_TASK_URL}/project/delete/${id}`)
             .then((res) => {
-                dispatch(projectActionCreators.deleteProjectSuccess())
+                dispatch(projectActionCreators.deleteProjectSuccess(id))
                 callback()
             })
             .catch(error => {
