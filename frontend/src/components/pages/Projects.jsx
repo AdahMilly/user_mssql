@@ -133,6 +133,7 @@ export const ProjectItem = ({ project, classes, history }) => {
             xs={12}
             spacing={2}
             justifyContent="center"
+            marginTop="10px"
           >
             <Grid item>
               <IconButton onClick={handleDelete} color="primary">
