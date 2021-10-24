@@ -1,4 +1,4 @@
-import { ERROR, GET_PROJECTS_, LOADING, PROJECT_CREATE_,DELETE_PROJECT_, SUCCESS } from "../types";
+import { ERROR, GET_PROJECTS_, LOADING, PROJECT_CREATE_,DELETE_PROJECT_,EDIT_PROJECT_, SUCCESS } from "../types";
 
 const createProjectLoading = () => ({
     type: `${PROJECT_CREATE_}${LOADING}`,
@@ -43,6 +43,21 @@ const deleteProjectError = () => ({
     type: `${DELETE_PROJECT_}${ERROR}`,
 
 })
+const EditProjectLoading = () => ({
+    type: `${EDIT_PROJECT_}${LOADING}`
+})
+
+const editProjectSuccess = (projectId) => ({
+    type: `${EDIT_PROJECT_}${SUCCESS}`,
+    payload: {
+        projectId
+    }
+})
+
+const editProjectError = () => ({
+    type: `${EDIT_PROJECT_}${ERROR}`,
+
+})
 
 
 
@@ -55,7 +70,10 @@ const projectActionCreators = {
     getProjectsError,
     deleteProjectLoading,
     deleteProjectSuccess,
-    deleteProjectError
+    deleteProjectError,
+    EditProjectLoading,
+    editProjectSuccess,
+    editProjectError
 }
 
 export default projectActionCreators;
