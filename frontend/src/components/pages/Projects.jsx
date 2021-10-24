@@ -116,13 +116,13 @@ export const ProjectItem = ({ project, classes, history }) => {
           </Grid>
           <Grid item style={{ margin: "10px 0" }} xs={12}>
             <Typography variant={"h5"} style={{ textTransform: "capitalize" }}>
-              <strong>Title: </strong>
+              <bold><strong>Title: </strong></bold>
               {project.project_name}
             </Typography>
           </Grid>
           <Grid item style={{ margin: "10px 0" }} xs={12}>
             <Typography variant="subtitle2">
-              <strong>Duration: </strong>
+              <i><strong>Duration: </strong></i>
               {moment(project.start_date).format("MMMM Do YYYY")} to{" "}
               {moment(project.end_date).format("MMMM Do YYYY")}
             </Typography>
@@ -135,13 +135,13 @@ export const ProjectItem = ({ project, classes, history }) => {
             justifyContent="center"
           >
             <Grid item>
-              <IconButton onClick={handleDelete}>
+              <IconButton onClick={handleDelete} color="primary">
                 <DeleteRoundedIcon />
               </IconButton>
             </Grid>
 
             <Grid item>
-              <IconButton>
+              <IconButton color="primary">
                 <EditIcon />
               </IconButton>
             </Grid>
