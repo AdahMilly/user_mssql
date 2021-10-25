@@ -12,7 +12,7 @@ import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getProjects } from "../../redux/actions/projectActions";
 import { deleteProject } from "../../redux/actions/projectActions";
-
+import { editProject } from "../../redux/actions/projectActions";
 import moment from "moment";
 
 const useStyles = makeStyles({
@@ -105,6 +105,7 @@ export const ProjectItem = ({ project, classes, history }) => {
 
   const handleEdit = (e) => {
     e.stopPropagation();
+    dispatch(editProject(project._id));
   }
 
   return (

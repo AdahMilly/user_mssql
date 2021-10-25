@@ -43,7 +43,7 @@ const deleteProjectError = () => ({
     type: `${DELETE_PROJECT_}${ERROR}`,
 
 })
-const EditProjectLoading = () => ({
+const editProjectLoading = () => ({
     type: `${EDIT_PROJECT_}${LOADING}`
 })
 
@@ -71,7 +71,7 @@ const projectActionCreators = {
     deleteProjectLoading,
     deleteProjectSuccess,
     deleteProjectError,
-    EditProjectLoading,
+    editProjectLoading,
     editProjectSuccess,
     editProjectError
 }
