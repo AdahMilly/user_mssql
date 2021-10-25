@@ -68,10 +68,6 @@ const projectReducer = (state = initialState, action) => {
                     projectLoading: true,
                 }
             case `${EDIT_PROJECT_}${SUCCESS}`:
-                // let projects = [...state.projects]
-                // const projectId = action.payload.projectId
-                // remove deleted 
-                projects = projects.filter((item) => item._id !== projectId);
                 return {
                     ...state,
                     projects: projects,

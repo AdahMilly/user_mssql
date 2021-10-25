@@ -12,6 +12,7 @@ import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { getProjects } from "../../redux/actions/projectActions";
 import { deleteProject } from "../../redux/actions/projectActions";
+
 import moment from "moment";
 
 const useStyles = makeStyles({
@@ -102,6 +103,10 @@ export const ProjectItem = ({ project, classes, history }) => {
     dispatch(deleteProject(project._id));
   };
 
+  const handleEdit = (e) => {
+    e.stopPropagation();
+  }
+
   return (
     <Grid item xs={12} md={6} lg={4} xl={3}>
       <Paper className={classes.paper} onClick={handleClick}>
@@ -142,7 +147,7 @@ export const ProjectItem = ({ project, classes, history }) => {
             </Grid>
 
             <Grid item>
-              <IconButton color="primary">
+              <IconButton onClick={handleEdit} color="primary">
                 <EditIcon />
               </IconButton>
             </Grid>

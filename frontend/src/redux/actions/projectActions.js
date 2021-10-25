@@ -45,3 +45,18 @@ export const deleteProject = (id, callback = () => null) => {
             })
     }
 }
+
+export const editProject = (id, callback = () => null) => {
+    return (dispatch) => {
+        dispatch(projectActionCreators.editProjectLoading())
+        axios.post(`${process.env.REACT_APP_PROJECT_TASK_URL}/project/update`)
+            .then((res) => {
+                dispatch(projectActionCreators.editProjectSuccess())
+                callback()
+            })
+            .catch(error => {
+                dispatch(projectActionCreators.editProjectError())
+                callback(error);
+            })
+    }
+}
