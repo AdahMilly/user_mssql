@@ -46,10 +46,10 @@ export const deleteProject = (id, callback = () => null) => {
     }
 }
 
-export const editProject = (callback = () => null) => {
+export const editProject = (project,callback = () => null) => {
     return (dispatch) => {
         dispatch(projectActionCreators.editProjectLoading())
-        axios.post(`${process.env.REACT_APP_PROJECT_TASK_URL}/project/update`)
+        axios.post(`${process.env.REACT_APP_PROJECT_TASK_URL}/project/update`,project)
             .then((res) => {
                 dispatch(projectActionCreators.editProjectSuccess())
                 callback()
