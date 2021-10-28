@@ -10,6 +10,7 @@ user_mssql is an application that helps with project and task management and tra
   -   Admin can delete,update a project.
   -  Admin can view all the registered users.
   -   Users can only visit specific pages.
+  -   Users get notified on successful registration.
 
 
 The following endpoints should be available for use once the API is complete.
