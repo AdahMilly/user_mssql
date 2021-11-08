@@ -4,6 +4,7 @@ export const SUCCESS = 'SUCCESS'
 export const ERROR = 'ERROR'
 
 // auth
+export const SIGN_UP = 'SIGN_UP_';
 export const SIGN_IN_ = 'SIGN_IN_';
 export const PROJECT_CREATE_ = 'PROJECT_CREATE_';
 export const GET_PROJECTS_ = 'GET_PROJECTS_';

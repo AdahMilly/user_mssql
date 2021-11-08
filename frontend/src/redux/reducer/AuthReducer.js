@@ -1,7 +1,8 @@
-import { ERROR, LOADING, SIGN_IN_, SUCCESS } from "../types";
+import { ERROR, LOADING, SIGN_IN_, SIGN_UP, SUCCESS } from "../types";
 
 const initialState = {
     user: {},
+    signUpLoading: false,
     singInLoading: false
 }
 
@@ -24,16 +25,23 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 singInLoading: false,
             };
-        case "loginUser":
-            try {
-                return {
-                    ...state,
-                    user: action.user
-                };
-
-            } catch (error) {
-                console.log(error);
-            } break
+        case `${SIGN_UP}${LOADING}`:
+            return {
+                ...state,
+                singUpLoading: true,
+                user: {}
+            };
+        case `${SIGN_UP}${SUCCESS}`:
+            return {
+                ...state,
+                singUpLoading: false,
+                user: action.payload.user
+            };
+        case `${SIGN_UP}${ERROR}`:
+            return {
+                ...state,
+                singUpLoading: false,
+            };
 
         default: return state
     }

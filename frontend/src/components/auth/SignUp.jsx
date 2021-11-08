@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
 
 import { signUp } from "../../redux/actions/authActions";
+import { useHistory } from "react-router";
 
 import { makeStyles } from "@material-ui/core/styles";
+import { CircularProgress } from "@mui/material";
 import { Typography, TextField, Button } from "@material-ui/core";
 
 const useStyles = makeStyles({
@@ -22,38 +23,40 @@ const useStyles = makeStyles({
 
 const SignUp = () => {
   const classes = useStyles();
+  const history = useHistory();
   const dispatch = useDispatch()
-  const auth = useSelector(state => state.auth)
-  const [user, setUser] = useState({
+  const loading = useSelector((state) => state.auth?.singUpLoading);
+  const [credentials, setCredentials] = useState({
     firstName: "",
     lastName: "",
     email: "",
     password: "",
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(signUp(user))
-    setUser({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-    })
+  const handleSignUpCallback = (error) => {
+    if (error) {
+      console.log(error);
+    } else {
+      history.push("/dashboard");
+    }
   };
 
-  if(auth.user._id) return <Redirect to="/dashboard"/>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signUp(credentials, handleSignUpCallback));
+  };
 
-  console.log({auth});
-
+  const onSignUp = () => {
+    window.localStorage.setItem("isAuthenticated", true);
+  };
 
   return (
     <>
       <form
-        noValidate
-        autoComplete="off"
-        className={classes.formStyle}
-        onSubmit={handleSubmit}
+          noValidate
+          autoComplete="off"
+          className={classes.formStyle}
+          onSubmit={handleSubmit}
       >
         <Typography variant="h5">Create Account</Typography>
         <TextField
@@ -62,8 +65,10 @@ const SignUp = () => {
           label="firstName"
           variant="outlined"
           fullWidth
-          value={user.firstName}
-          onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+          value={credentials.firstName}
+          onChange={(e) =>
+            setCredentials({ ...credentials, firstName: e.target.value })
+          }
         />
         <TextField 
            className={classes.spacing}
@@ -71,8 +76,10 @@ const SignUp = () => {
            label="lastName"
            variant="outlined"
            fullWidth
-           value={user.lastName}
-           onChange={(e) => setUser({...user, lastName: e.target.value})}
+           value={credentials.lastName}
+           onChange={(e) =>
+            setCredentials({ ...credentials, lastName: e.target.value })
+          }
         />
         <TextField
           className={classes.spacing}
@@ -80,8 +87,10 @@ const SignUp = () => {
           label="enterEmail"
           variant="outlined"
           fullWidth
-          value={user.email}
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
+          value={credentials.email}
+          onChange={(e) =>
+            setCredentials({ ...credentials, email: e.target.value })
+          }
         />
         <TextField
           className={classes.spacing}
@@ -90,16 +99,21 @@ const SignUp = () => {
           label="enterPassword"
           variant="outlined"
           fullWidth
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
+          value={credentials.password}
+          onChange={(e) =>
+            setCredentials({ ...credentials, password: e.target.value })
+          }
         />
         <Button
           variant="contained"
           color="primary"
           className={classes.spacing}
           type="submit"
+          onClick={onSignUp}
+          disabled={loading}
+          startIcon={loading && <CircularProgress size={20}/> }
         >
-          SignUp
+          Sign Up
         </Button>
       </form>
     </>

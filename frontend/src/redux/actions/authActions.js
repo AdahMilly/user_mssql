@@ -5,20 +5,23 @@ import authActionCreators from "../actionCreators/auth.actions";
 
 const { REACT_APP_API_URL } = process.env;
 
-export const signUp = (user) => {
+export const signUp = (credentials, callback = () => null) => {
     return (dispatch) => {
-        axios.post(`${REACT_APP_API_URL}/auth/registerUser`, user)
-            .then(({ data }) => {
-                const { token, user } = data;
 
-                localStorage.setItem("token", token)
-                dispatch({
-                    type: "registerUser",
-                    user
-                })
+        dispatch(authActionCreators.userSignUpLoading())
+
+        axios.post(`${REACT_APP_API_URL}/auth/registerUser`, credentials)
+            .then(res => {
+
+                const { user, token } = res.data;
+
+                setUserAndToken(user, token)
+                dispatch(authActionCreators.userSignUpSuccess(user))
+                callback()
             })
             .catch(error => {
-                console.log(error);
+                callback(error)
+                dispatch(authActionCreators.userSignUpError())
             })
     }
 }
@@ -43,16 +46,3 @@ export const signIn = (credentials, callback = () => null) => {
             })
     }
 }
-
-
-// export const loadUser = () => {
-//     return (dispatch, getState) => {
-//       const token = getState().auth.token;
-//       if (token) {
-//         dispatch({
-//           type: "USER_LOADED",
-//           token,
-//         });
-//       } else return null;
-//     };
-//   };

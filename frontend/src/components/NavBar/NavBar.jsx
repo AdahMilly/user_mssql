@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useHistory } from "react-router-dom";
 
 import { AppBar, Typography, Toolbar, Button } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
@@ -13,6 +14,10 @@ const useStyles = makeStyles({
     textDecoration: "none",
   },
 });
+
+const CustomButton = styled(Button)(({theme})=>({
+  color:"#fff"
+}))
 
 const NavBar = () => {
   const classes = useStyles();
@@ -30,14 +35,14 @@ const NavBar = () => {
               projectManagement
             </h5>
           </Typography>
-          <Button variant={"outlined"} onClick={() => handleGetStarted()}>
+          <CustomButton  variant={"outlined"} onClick={() => handleGetStarted()}>
             Get Started
-          </Button>
-          <Button variant={"outlined"}>
+          </CustomButton>
+          <CustomButton variant={"outlined"}>
             <Link className={classes.linkStyle} to="/signin">
               SignIn
             </Link>
-          </Button>
+          </CustomButton>
         </Toolbar>
       </AppBar>
     </>

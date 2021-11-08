@@ -31,7 +31,7 @@ const SignIn = () => {
     password: "",
   });
 
-  const handleSingInCallback = (error) => {
+  const handleSignInCallback = (error) => {
     if (error) {
       console.log(error);
     } else {
@@ -41,7 +41,7 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signIn(credentials, handleSingInCallback));
+    dispatch(signIn(credentials, handleSignInCallback));
   };
 
   const onLogin = () => {
