@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-// import { useDispatch } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { Card } from "@mui/material";
@@ -8,7 +7,6 @@ import NavBar from "./components/NavBar/NavBar";
 import SignIn from "./components/auth/SignIn";
 import SignUp from "./components/auth/SignUp";
 import SideBar from "./components/SideBar/SideBar";
-// import { loadUser } from "./store/actions/authActions";
 
 import "./app.css";
 import Progress from "./components/pages/Progress";
