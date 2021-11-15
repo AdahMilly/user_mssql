@@ -29,7 +29,7 @@ const App = () => {
       dispatch(authActionCreators.userSignInSuccess(user))
     }
   }, [user, dispatch])
-
+  
   return (
     <>
       <Router>
@@ -41,7 +41,7 @@ const App = () => {
               <Switch>
                 <Route path="/signin" component={SignIn} />
                 <Route path="/signup" component={SignUp} />
-                <Route path="/dashboard" component={Projects} />
+                <ProtectedRouter path="/dashboard" component={Projects}/>
                 <Route path="/projectform" component={ProjectForm} />
                 <Route path="/taskform" component={TaskForm} />
                 <Route path="/addtask/:project_id" component={AddTask} />

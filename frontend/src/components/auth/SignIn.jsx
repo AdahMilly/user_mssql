@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../../redux/actions/authActions";
 
@@ -26,10 +26,15 @@ const SignIn = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.auth?.singInLoading);
+  const {user} = useSelector((state) => state.auth);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if(user?._id) history.push("/dashboard")
+  }, [user?._id])
 
   const handleSignInCallback = (error) => {
     if (error) {
